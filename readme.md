@@ -6,6 +6,8 @@ A [grunt](http://github.com/gruntjs/grunt/) task that utilizes
 [complexity-report](https://github.com/philbooth/complexityReport.js)
 to evaluate the complexity and maintainability of code.
 
+![screenshot](https://raw.github.com/vigetlabs/grunt-complexity/master/example.png)
+
 ## Usage
 
 Within your grunt file:
