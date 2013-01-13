@@ -40,4 +40,4 @@ Within your grunt file:
 
 ## What is Cyclomatic and Halstead?
 
-Documentation on this to come.
+Documentation on this to come. For now, see [jscomplexity.org](http://jscomplexity.org/complexity)
