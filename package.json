@@ -1,0 +1,31 @@
+{
+  "name": "grunt-complexity",
+  "description": "Evaluates code maintainability using Halstead and Cyclomatic metrics.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/vigetlabs/grunt-complexity.git",
+  "author": {
+    "name": "Nate Hunzaker",
+    "email": "nate.hunzaker@viget.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vigetlabs/grunt-complexity"
+  },
+  "bugs" : {
+    "url" : "https://github.com/vigetlabs/grunt-complexity/issues"
+  },
+  "licence" : "MIT",
+  "main": "grunt.js",
+  "readmeFilename": "readme.md",
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "dependencies": {
+    "grunt": "0.3.x",
+    "complexity-report": "0.6.x"
+  },
+  "keywords": [
+    "gruntplugin", "complexity", "halstead", "cyclomatic"
+  ]
+
+}
