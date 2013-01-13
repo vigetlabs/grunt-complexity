@@ -4,10 +4,10 @@ var cr = require('complexity-report');
 
 module.exports = function(grunt) {
 
-	var BLOCK = "\u2588";
+	var BLOCK = '\u2588';
 
 	var make = grunt.template.process;
-	var bodyTemplate = fs.readFileSync(__dirname + "/reporter.tpl").toString();
+	var bodyTemplate = fs.readFileSync(__dirname + '/reporter.tpl').toString();
 	var tableLength = 30;
 
 	var options = {
@@ -28,14 +28,14 @@ module.exports = function(grunt) {
 		// Prevent negative values from breaking the array
 		remaining = Math.max(0, remaining);
 
-		return string + Array(remaining + 3).join(" ");
+		return string + Array(remaining + 3).join(' ');
 	}
 
 	function generateBar(score, threshold) {
 
 		// 17.1 for 1/10 of 171, the maximum score
 		var magnitude = Math.floor(score / 17.1);
-		var bar = Array(magnitude).join(BLOCK) +  " " + score.toPrecision(5);
+		var bar = Array(magnitude).join(BLOCK) +  ' ' + score.toPrecision(5);
 
 		// Out of 171 points, what % did it earn?
 		var rating = score / threshold;
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
 		var bar = generateBar(analysis.maintainability, options.maintainability);
 		var label = fitWhitespace(filepath);
 		
-		log(symbol + " " + label + bar);
+		log(symbol + ' ' + label + bar);
 
 		if (!valid) grunt.fail.errorcount++;
 
@@ -111,11 +111,11 @@ module.exports = function(grunt) {
 
 	});
 
-	grunt.registerMultiTask('complexity', 'Determines complexity of code."', function () {
+	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function () {
 
 		var files = grunt.file.expandFiles(this.file.src);
 
-		log(" ");
+		log(' ');
 
 		// Set defaults
 		var params = this.data.options;
