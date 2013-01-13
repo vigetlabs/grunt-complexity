@@ -10,6 +10,10 @@ to evaluate the complexity and maintainability of code.
 
 ## Usage
 
+```bash
+npm install grunt-complexity --save
+```
+
 Within your grunt file:
 
 ```javascript
