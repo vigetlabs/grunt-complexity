@@ -8,8 +8,8 @@ module.exports = function(grunt) {
 			generic: {
 				src: ['grunt.js', 'tasks/grunt-complexity.js', 'tests/*.js'],
 				options: {
-					cyclomatic: 90,
-					halstead: 90,
+					cyclomatic: 3,
+					halstead: 8,
 					maintainability: 100
 				}
 			}
