@@ -7,6 +7,7 @@ A [grunt](http://github.com/gruntjs/grunt/) task that utilizes
 to evaluate the complexity and maintainability of code.
 
 ![screenshot](https://raw.github.com/vigetlabs/grunt-complexity/master/example.png)
+![screenshot](https://raw.github.com/vigetlabs/grunt-complexity/master/complexity.png)
 
 ## Usage
 
