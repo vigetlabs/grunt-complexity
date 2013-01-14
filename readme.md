@@ -35,6 +35,7 @@ Within your grunt file:
 
 	});
 
+	grunt.loadNpmTasks('grunt-complexity');
 	grunt.registerTask('default', 'complexity');
 ```
 
