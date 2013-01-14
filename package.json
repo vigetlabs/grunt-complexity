@@ -24,7 +24,7 @@
     "grunt": ">= 0.3.x",
     "complexity-report": "0.6.x"
   },
-  "dev-dependencies": {
+  "devDependencies": {
     "mocha": "~1.8.1"
   },
   "keywords": [
