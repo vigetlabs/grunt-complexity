@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
 		complexity: {
 			generic: {
-				src: ['grunt.js', 'tasks/grunt-complexity.js', 'tests/*.js'],
+				src: ['grunt.js', 'tasks/complexity.js', 'tests/*.js'],
 				options: {
 					cyclomatic: 3,
 					halstead: 8,
