@@ -11,10 +11,10 @@
     "type": "git",
     "url": "https://github.com/vigetlabs/grunt-complexity"
   },
-  "bugs" : {
-    "url" : "https://github.com/vigetlabs/grunt-complexity/issues"
+  "bugs": {
+    "url": "https://github.com/vigetlabs/grunt-complexity/issues"
   },
-  "licence" : "MIT",
+  "licence": "MIT",
   "main": "grunt.js",
   "readmeFilename": "readme.md",
   "engines": {
@@ -24,8 +24,13 @@
     "grunt": "0.3.x",
     "complexity-report": "0.6.x"
   },
+  "dev-dependencies": {
+    "mocha": "~1.8.1"
+  },
   "keywords": [
-    "gruntplugin", "complexity", "halstead", "cyclomatic"
+    "gruntplugin",
+    "complexity",
+    "halstead",
+    "cyclomatic"
   ]
-
 }
