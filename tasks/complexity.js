@@ -91,7 +91,7 @@ module.exports = function(grunt) {
 
 	}
 
-	grunt.registerHelper('complexity', function (src, filepath, options) {
+	function complexityTask (src, filepath, options) {
 
 		var analysis = cr.run(src, options);
 
@@ -109,11 +109,11 @@ module.exports = function(grunt) {
 			determineComplexity(filepath, data, options);
 		});
 
-	});
+	}
 
 	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function () {
 
-		var files = grunt.file.expandFiles(this.file.src);
+		var files = this.filesSrc || grunt.file.expandFiles(this.file.src);
 
 		log(' ');
 
@@ -125,7 +125,7 @@ module.exports = function(grunt) {
 
 		files.forEach(function(filepath) {
 			var content = grunt.file.read(filepath);
-			grunt.helper('complexity', content, filepath, options);
+			complexityTask(content, filepath, options);
 		});
 
 		return this.errorCount === 0;
