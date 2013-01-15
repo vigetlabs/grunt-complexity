@@ -46,11 +46,13 @@ module.exports = function(grunt) {
 
 	function longestString(arrayOfStrings) {
 
-		var longest = arrayOfStrings.sort(function(a,b) { 
-			return a.length < b.length; 
-		})[0].length;
+		var clone = Array.apply(null, arrayOfStrings);
 
-		return longest;
+		var longest = clone.sort(function(a,b) { 
+			return a.length > b.length ? -1 : 1; 
+		})[0];
+
+		return longest.length;
 
 	}
 
