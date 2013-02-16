@@ -7,7 +7,7 @@ describe("Generic Sanity Check", function() {
 		// Load local tasks.
 		grunt.loadTasks('tasks');
 
-		exports['require'] = {
+		exports.require = {
 
 			setUp: function(done) {
 				// setup here
@@ -25,7 +25,7 @@ describe("Generic Sanity Check", function() {
 		// Load local tasks.
 		grunt.loadTasks('tasks');
 
-		exports['require'] = {
+		exports.require = {
 
 			setUp: function(done) {
 				// setup here

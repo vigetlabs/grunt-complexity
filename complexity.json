@@ -1,0 +1,8 @@
+{
+  "src": "<%= files %>",
+  "options": {
+    "cyclomatic": 3,
+    "halstead": 8,
+    "maintainability": 100
+  }
+}

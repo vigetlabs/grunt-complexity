@@ -30,8 +30,10 @@
 		"test": "mocha"
 	},
 	"dependencies": {
-		"grunt": "0.3.x",
-		"complexity-report": "0.6.x"
+		"grunt": "0.4.x",
+		"complexity-report": "0.6.x",
+    "grunt-simple-mocha": "0.3.x",
+    "grunt-contrib-jshint": "0.1.x"
 	},
 	"devDependencies": {
 		"mocha": "~1.8.1"

@@ -14,7 +14,7 @@ module.exports = function(grunt) {
 		cyclomatic: 3,
 		halstead: 8,
 		maintainability: 100
-   	};
+	};
 
 	function log(message) {
 		message = message || '';

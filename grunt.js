@@ -3,18 +3,15 @@ module.exports = function(grunt) {
 
 	// Project configuration.
 	grunt.initConfig({
-
+		files: ['grunt.js', 'tasks/*.js', 'test/*.js'],
 		complexity: {
-			generic: {
-				src: ['grunt.js', 'tasks/complexity.js', 'tests/*.js'],
-				options: {
-					cyclomatic: 3,
-					halstead: 8,
-					maintainability: 100
-				}
-			}
+			generic: (function() {
+				// Loading config manualy due to 0.3.x vs 0.4.x differences
+				var config = grunt.file.readJSON('complexity.json');
+				config.src = '<config:files>';
+				return config;
+			}())
 		}
-
 	});
 
 	grunt.registerTask('default', 'complexity');
