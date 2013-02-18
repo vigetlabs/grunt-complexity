@@ -1,6 +1,7 @@
 {
   "src": "<%= files %>",
   "options": {
+    "errorsOnly": true,
     "cyclomatic": 3,
     "halstead": 8,
     "maintainability": 100

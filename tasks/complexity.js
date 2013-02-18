@@ -11,109 +11,125 @@ module.exports = function(grunt) {
 	var tableLength = 30;
 
 	var options = {
+		errorsOnly: false,
 		cyclomatic: 3,
 		halstead: 8,
 		maintainability: 100
 	};
 
-	function log(message) {
+	function log(message, display) {
 		message = message || '';
 		grunt.log.writeln(message);
 	}
 
-	function fitWhitespace(string) {
+	var Complexity = {
 
-		var remaining = tableLength - string.length;
+		fitWhitespace: function(string) {
 
-		// Prevent negative values from breaking the array
-		remaining = Math.max(0, remaining);
+			var remaining = tableLength - string.length;
 
-		return string + Array(remaining + 3).join(' ');
-	}
+			// Prevent negative values from breaking the array
+			remaining = Math.max(0, remaining);
 
-	function generateBar(score, threshold) {
+			return string + Array(remaining + 3).join(' ');
 
-		// 17.1 for 1/10 of 171, the maximum score
-		var magnitude = Math.floor(score / 17.1);
-		var bar = Array(magnitude).join(BLOCK) +  ' ' + score.toPrecision(5);
+		},
 
-		// Out of 171 points, what % did it earn?
-		var rating = score / threshold;
+		generateBar: function(score, threshold) {
 
-		return rating < 1 ? bar.red : rating < 1.2 ? bar.yellow : bar.green;
+			// 17.1 for 1/10 of 171, the maximum score
+			var magnitude = Math.floor(score / 17.1);
+			var bar = Array(magnitude).join(BLOCK) + ' ' + score.toPrecision(5);
 
-	}
+			// Out of 171 points, what % did it earn?
+			var rating = score / threshold;
 
-	function longestString(arrayOfStrings) {
+			return rating < 1 ? bar.red : rating < 1.2 ? bar.yellow : bar.green;
 
-		var clone = Array.apply(null, arrayOfStrings);
+		},
 
-		var longest = clone.sort(function(a,b) { 
-			return a.length > b.length ? -1 : 1; 
-		})[0];
+		longestString: function(arrayOfStrings) {
 
-		return longest.length;
+			var clone = Array.apply(null, arrayOfStrings);
 
-	}
+			var longestLength = clone.reduce(function(memo, a) {
+				return memo > a.length ? memo : a.length;
+			}, 0);
 
-	function isComplicated(data, options) {
+			return longestLength;
 
-		var complicated = false;
+		},
 
-		if (data.complexity.cyclomatic > options.cyclomatic) {
-			complicated = true;
+		isComplicated: function(data, options) {
+
+			var complicated = false;
+
+			if(data.complexity.cyclomatic > options.cyclomatic) {
+				complicated = true;
+			}
+
+			if(data.complexity.halstead.difficulty > options.halstead) {
+				complicated = true;
+			}
+
+			return complicated;
+
+		},
+
+		isMaintainable: function(filepath, data, options) {
+
+			var expected = options.maintainability;
+			var actual = data.maintainability;
+
+			return expected < actual;
+
+		},
+
+		determineComplexity: function(filepath, data, options) {
+
+			if(this.isComplicated(data, options) === false) return;
+
+			data.filepath = filepath;
+			var message = make(bodyTemplate, {
+				data: data
+			});
+
+			log(message.yellow);
+			grunt.fail.errorcount++;
+
+		},
+
+		maintainabilityMessage: function(filepath, valid, analysis, options) {
+
+			var symbol = valid ? '\u2713'.green : '\u2717'.red;
+
+			var bar = this.generateBar(analysis.maintainability, options.maintainability);
+			var label = this.fitWhitespace(filepath);
+
+			return symbol + ' ' + label + bar;
+
+		},
+
+		complexityTask: function(src, filepath, options) {
+
+			var analysis = cr.run(src, options);
+
+			var valid = this.isMaintainable(filepath, analysis, options);
+
+			if (!options.errorsOnly || !valid) {
+				var message = this.maintainabilityMessage(filepath, valid, analysis, options);
+				log(message);
+			}
+
+			if(!valid) grunt.fail.errorcount++;
+
+			analysis.functions.forEach(function(data) {
+				this.determineComplexity(filepath, data, options);
+			}, this);
 		}
+	};
 
-		if (data.complexity.halstead.difficulty > options.halstead) {
-			complicated = true;
-		}
-
-		return complicated;
-	}
-
-	function isMaintainable(filepath, data, options) {
-
-		var expected = options.maintainability;
-		var actual = data.maintainability;
-
-		return expected < actual;
-
-	}
-
-	function determineComplexity(filepath, data, options) {
-
-		if (isComplicated(data, options) === false) return;
-
-		data.filepath = filepath;
-
-		var message = make(bodyTemplate, data);
-
-		log(message.yellow);
-		grunt.fail.errorcount++;
-
-	}
-
-	function complexityTask (src, filepath, options) {
-
-		var analysis = cr.run(src, options);
-
-		var valid = isMaintainable(filepath, analysis, options);
-		var symbol = valid? '\u2713'.green : '\u2717'.red;
-
-		var bar = generateBar(analysis.maintainability, options.maintainability);
-		var label = fitWhitespace(filepath);
-		
-		log(symbol + ' ' + label + bar);
-
-		if (!valid) grunt.fail.errorcount++;
-
-		analysis.functions.forEach(function(data) {
-			determineComplexity(filepath, data, options);
-		});
-
-	}
-
-	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function () {
+	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function() {
 
 		var files = this.filesSrc || grunt.file.expandFiles(this.file.src);
 
@@ -121,17 +137,19 @@ module.exports = function(grunt) {
 
 		// Set defaults
 		var params = this.data.options;
-		for (var o in params) options[o] = params[o];
+		for(var o in params) options[o] = params[o];
 
-		tableLength = longestString(files);
+		tableLength = Complexity.longestString(files);
 
 		files.forEach(function(filepath) {
 			var content = grunt.file.read(filepath);
-			complexityTask(content, filepath, options);
+			Complexity.complexityTask(content, filepath, options);
 		});
 
 		return this.errorCount === 0;
 
 	});
+
+	return Complexity;
 
 };

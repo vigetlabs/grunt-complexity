@@ -36,7 +36,8 @@
     "grunt-contrib-jshint": "0.1.x"
 	},
 	"devDependencies": {
-		"mocha": "~1.8.1"
+		"mocha": "~1.8.1",
+    "chai": "1.4.2"
 	},
 	"keywords": [
 		"gruntplugin",
