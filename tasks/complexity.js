@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 	var bodyTemplate = fs.readFileSync(__dirname + '/reporter.tpl').toString();
 	var tableLength = 30;
 
-	var options = {
+	var defaults = {
 		cyclomatic: 3,
 		halstead: 8,
 		maintainability: 100
@@ -102,7 +102,7 @@ module.exports = function(grunt) {
 
 		var bar = generateBar(analysis.maintainability, options.maintainability);
 		var label = fitWhitespace(filepath);
-		
+
 		log(symbol + ' ' + label + bar);
 
 		if (!valid) grunt.fail.errorcount++;
@@ -116,12 +116,9 @@ module.exports = function(grunt) {
 	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function () {
 
 		var files = this.filesSrc || grunt.file.expandFiles(this.file.src);
+		var options = this.options(defaults);
 
 		log(' ');
-
-		// Set defaults
-		var params = this.data.options;
-		for (var o in params) options[o] = params[o];
 
 		tableLength = longestString(files);
 
