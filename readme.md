@@ -25,6 +25,8 @@ Within your grunt file:
 			generic: {
 				src: ['grunt.js', 'tasks/grunt-complexity.js'],
 				options: {
+					jsLintXML: 'report.xml' // use if you want to create XML report (understood by Jenkins Violations plugin)
+					errorsOnly: false, // show only maintainability errors
 					cyclomatic: 3,
 					halstead: 8,
 					maintainability: 100
