@@ -1,0 +1,13 @@
+<file name="<%= filepath %>">
+  <% complexFunctions.forEach(function(data){ %>
+  <issue
+    line="<%= data.line %>"
+    char="<%= data.name %>"
+    reason="<%= data.name %> is too complicated"
+    evidence="Cyclomatic: <%= data.complexity.cyclomatic %>,
+    Halstead: <%= data.complexity.halstead.difficulty.toPrecision(5) %>
+    | Effort: <%= data.complexity.halstead.effort.toPrecision(5) %>
+    | Volume: <%= data.complexity.halstead.volume.toPrecision(5) %>
+    | Vocabulary: <%= data.complexity.halstead.vocabulary %>" />
+  <% }) %>
+</file>

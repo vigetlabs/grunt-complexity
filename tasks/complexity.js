@@ -30,8 +30,7 @@ module.exports = function(grunt) {
 
 		},
 
-		isMaintainable: function(filepath, data, options) {
-
+		isMaintainable: function(data, options) {
 			var expected = options.maintainability;
 			var actual = data.maintainability;
 
@@ -39,31 +38,30 @@ module.exports = function(grunt) {
 
 		},
 
-		determineComplexity: function(reporter, filepath, data, options) {
+		reportComplexity: function(reporter, analysis, filepath, options) {
 
-			if(this.isComplicated(data, options) === false) return;
+			var complicatedFunctions = analysis.functions.filter(function(data) {
+				return this.isComplicated(data, options);
+			}, this);
 
-			reporter.complexity(filepath, data);
+			grunt.fail.errorcount += complicatedFunctions.length;
 
-			grunt.fail.errorcount++;
+			reporter.complexity(filepath, complicatedFunctions);
 
 		},
 
-		complexityTask: function(reporter, src, filepath, options) {
+		reportMaintainability: function(reporter, analysis, filepath, options) {
 
-			var analysis = cr.run(src, options);
-
-			var valid = this.isMaintainable(filepath, analysis, options);
+			var valid = this.isMaintainable(analysis, options);
 
 			if(!options.errorsOnly || !valid) {
 				reporter.maintainability(filepath, valid, analysis);
 			}
 
-			if(!valid) grunt.fail.errorcount++;
+			if(!valid) {
+				grunt.fail.errorcount++;
+			}
 
-			analysis.functions.forEach(function(data) {
-				this.determineComplexity(reporter, filepath, data, options);
-			}, this);
 		},
 
 		analyze: function(reporter, files, options) {
@@ -71,7 +69,10 @@ module.exports = function(grunt) {
 
 			files.forEach(function(filepath) {
 				var content = grunt.file.read(filepath);
-				this.complexityTask(reporter, content, filepath, options);
+				var analysis = cr.run(content, options);
+
+				this.reportMaintainability(reporter, analysis, filepath, options);
+				this.reportComplexity(reporter, analysis, filepath, options);
 			}, this);
 
 			reporter.finish();

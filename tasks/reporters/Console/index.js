@@ -21,13 +21,16 @@ module.exports = function(grunt) {
 
     },
 
-    complexity: function(filepath, data) {
-      data.filepath = filepath;
-      var message = grunt.template.process(bodyTemplate, {
-        data: data
-      });
+    complexity: function(filepath, complexFunctions) {
+      complexFunctions.forEach(function(data) {
+        data.filepath = filepath;
+        var message = grunt.template.process(bodyTemplate, {
+          data: data
+        });
 
-      this.log(message.yellow);
+        this.log(message.yellow);
+
+      }, this);
     },
 
     maintainability: function(filepath, valid, analysis) {
