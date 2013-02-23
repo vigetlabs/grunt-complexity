@@ -86,7 +86,7 @@ module.exports = function(grunt) {
 
 		data.filepath = filepath;
 
-		var message = make(bodyTemplate, data);
+		var message = make(bodyTemplate, { data: data });
 
 		log(message.yellow);
 		grunt.fail.errorcount++;
