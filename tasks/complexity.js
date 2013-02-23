@@ -4,7 +4,9 @@ var _ = require('underscore');
 
 module.exports = function(grunt) {
 
+	var MultiReporter = require('./reporters/multi')(grunt);
 	var ConsoleReporter = require('./reporters/Console')(grunt);
+	var JSLintXMLReporter = require('./reporters/JSLintXML')(grunt);
 
 	var Complexity = {
 		defaultOptions : {
@@ -86,7 +88,11 @@ module.exports = function(grunt) {
 		// Set defaults
 		var options = _.defaults(this.data.options, Complexity.defaultOptions);
 
-		var reporter = new ConsoleReporter(files, options);
+		var reporter = new MultiReporter(files, options);
+		reporter.addReporter(ConsoleReporter);
+		if (options.jsLintXML) {
+			reporter.addReporter(JSLintXMLReporter);
+		}
 
 		Complexity.analyze(reporter, files, options);
 

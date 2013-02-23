@@ -1,7 +1,6 @@
 {
   "src": "<%= files %>",
   "options": {
-    "errorsOnly": true,
     "jsLintXML": "report.xml",
     "cyclomatic": 3,
     "halstead": 8,
