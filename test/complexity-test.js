@@ -18,22 +18,4 @@ describe("Generic Sanity Check", function() {
 
 	});
 
-	it("works with Grunt 0.3.x", function() {
-
-		var grunt = require('./grunt.0.3');
-
-		// Load local tasks.
-		grunt.loadTasks('tasks');
-
-		exports.require = {
-
-			setUp: function(done) {
-				// setup here
-				done();
-			}
-
-		};
-
-	});
-
 });
