@@ -1,10 +1,13 @@
 # Grunt-Complexity
 
-[Still a significant work in progress]
-
 A [grunt](http://github.com/gruntjs/grunt/) task that utilizes
 [complexity-report](https://github.com/philbooth/complexityReport.js)
 to evaluate the complexity and maintainability of code.
+
+## Versions
+
+- Use version 0.0.7 for Grunt 0.3.x
+- Use versions 0.1.x for Grunt 0.4.x
 
 ![screenshot](https://raw.github.com/vigetlabs/grunt-complexity/master/example.png)
 ![screenshot](https://raw.github.com/vigetlabs/grunt-complexity/master/complexity.png)
