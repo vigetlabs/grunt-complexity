@@ -37,34 +37,3 @@ describe("Generic Sanity Check", function() {
 	});
 
 });
-var grunt = require('./grunt.0.4');
-var Complexity = require('../tasks/complexity.js')(grunt);
-var expect = require('chai').expect;
-
-describe("Utility methods", function() {
-
-	describe("longestString", function() {
-
-		it('should return longest string length from array', function() {
-			// given
-			var arr = ["abc", "asdff", "defg"];
-			// when
-			var longestLength = Complexity.longestString(arr);
-
-			// then
-			expect(longestLength).to.equal(5);
-		});
-
-		it('should return 0 for empty array', function() {
-			// given
-			var arr = [];
-
-			// when
-			var longestLength = Complexity.longestString(arr);
-
-			// then
-			expect(longestLength).to.equal(0);
-		});
-
-	});
-});
