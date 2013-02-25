@@ -1,134 +1,115 @@
 /*global module:false*/
-var fs = require('fs');
 var cr = require('complexity-report');
 
 module.exports = function(grunt) {
 
-	var BLOCK = '\u2588';
+	var MultiReporter = require('./reporters/multi')(grunt);
+	var ConsoleReporter = require('./reporters/Console')(grunt);
+	var JSLintXMLReporter = require('./reporters/JSLintXML')(grunt);
 
-	var make = grunt.template.process;
-	var bodyTemplate = fs.readFileSync(__dirname + '/reporter.tpl').toString();
-	var tableLength = 30;
+	var Complexity = {
 
-	var defaults = {
-		cyclomatic: 3,
-		halstead: 8,
-		maintainability: 100
-   	};
+		defaultOptions: {
+			errorsOnly: false,
+			cyclomatic: 3,
+			halstead: 8,
+			maintainability: 100
+		},
 
-	function log(message) {
-		message = message || '';
-		grunt.log.writeln(message);
-	}
+		buildReporter: function(files, options) {
 
-	function fitWhitespace(string) {
+			var reporter = new MultiReporter(files, options);
+			reporter.addReporter(ConsoleReporter);
 
-		var remaining = tableLength - string.length;
+			if(options.jsLintXML) {
+				reporter.addReporter(JSLintXMLReporter);
+			}
+			
+			return reporter;
 
-		// Prevent negative values from breaking the array
-		remaining = Math.max(0, remaining);
+		},
 
-		return string + Array(remaining + 3).join(' ');
-	}
+		isComplicated: function(data, options) {
 
-	function generateBar(score, threshold) {
+			var complicated = false;
 
-		// 17.1 for 1/10 of 171, the maximum score
-		var magnitude = Math.floor(score / 17.1);
-		var bar = Array(magnitude).join(BLOCK) +  ' ' + score.toPrecision(5);
+			if(data.complexity.cyclomatic > options.cyclomatic) {
+				complicated = true;
+			}
 
-		// Out of 171 points, what % did it earn?
-		var rating = score / threshold;
+			if(data.complexity.halstead.difficulty > options.halstead) {
+				complicated = true;
+			}
 
-		return rating < 1 ? bar.red : rating < 1.2 ? bar.yellow : bar.green;
+			return complicated;
 
-	}
+		},
 
-	function longestString(arrayOfStrings) {
+		isMaintainable: function(data, options) {
 
-		var clone = Array.apply(null, arrayOfStrings);
+			var expected = options.maintainability;
+			var actual = data.maintainability;
 
-		var longest = clone.sort(function(a,b) { 
-			return a.length > b.length ? -1 : 1; 
-		})[0];
+			return expected < actual;
 
-		return longest.length;
+		},
 
-	}
+		reportComplexity: function(reporter, analysis, filepath, options) {
 
-	function isComplicated(data, options) {
+			var complicatedFunctions = analysis.functions.filter(function(data) {
+				return this.isComplicated(data, options);
+			}, this);
 
-		var complicated = false;
+			grunt.fail.errorcount += complicatedFunctions.length;
 
-		if (data.complexity.cyclomatic > options.cyclomatic) {
-			complicated = true;
+			reporter.complexity(filepath, complicatedFunctions);
+
+		},
+
+		reportMaintainability: function(reporter, analysis, filepath, options) {
+
+			var valid = this.isMaintainable(analysis, options);
+
+			if(!options.errorsOnly || !valid) {
+				reporter.maintainability(filepath, valid, analysis);
+			}
+
+			if(!valid) {
+				grunt.fail.errorcount++;
+			}
+
+		},
+
+		analyze: function(reporter, files, options) {
+			reporter.start();
+
+			files.forEach(function(filepath) {
+				var content = grunt.file.read(filepath);
+				var analysis = cr.run(content, options);
+
+				this.reportMaintainability(reporter, analysis, filepath, options);
+				this.reportComplexity(reporter, analysis, filepath, options);
+			}, this);
+
+			reporter.finish();
 		}
+	};
 
-		if (data.complexity.halstead.difficulty > options.halstead) {
-			complicated = true;
-		}
-
-		return complicated;
-	}
-
-	function isMaintainable(filepath, data, options) {
-
-		var expected = options.maintainability;
-		var actual = data.maintainability;
-
-		return expected < actual;
-
-	}
-
-	function determineComplexity(filepath, data, options) {
-
-		if (isComplicated(data, options) === false) return;
-
-		data.filepath = filepath;
-
-		var message = make(bodyTemplate, { data: data });
-
-		log(message.yellow);
-		grunt.fail.errorcount++;
-
-	}
-
-	function complexityTask (src, filepath, options) {
-
-		var analysis = cr.run(src, options);
-
-		var valid = isMaintainable(filepath, analysis, options);
-		var symbol = valid? '\u2713'.green : '\u2717'.red;
-
-		var bar = generateBar(analysis.maintainability, options.maintainability);
-		var label = fitWhitespace(filepath);
-
-		log(symbol + ' ' + label + bar);
-
-		if (!valid) grunt.fail.errorcount++;
-
-		analysis.functions.forEach(function(data) {
-			determineComplexity(filepath, data, options);
-		});
-
-	}
-
-	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function () {
+	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function() {
 
 		var files = this.filesSrc || grunt.file.expandFiles(this.file.src);
-		var options = this.options(defaults);
 
-		log(' ');
+		// Set defaults
+		var options = this.options(Complexity.defaultOptions);
 
-		tableLength = longestString(files);
+		var reporter = Complexity.buildReporter(files, options);
 
-		files.forEach(function(filepath) {
-			var content = grunt.file.read(filepath);
-			complexityTask(content, filepath, options);
-		});
+		Complexity.analyze(reporter, files, options);
 
 		return this.errorCount === 0;
 
 	});
+
+	return Complexity;
 
 };
