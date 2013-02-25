@@ -1,7 +1,5 @@
 module.exports = function(grunt) {
 
-  var _ = require('underscore');
-
   var MultiReporter = function(filenames, options) {
       this.filenames = filenames;
       this.options = options;

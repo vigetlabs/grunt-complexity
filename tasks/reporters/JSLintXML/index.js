@@ -1,7 +1,6 @@
 module.exports = function(grunt) {
 
   var fs = require('fs');
-  var _ = require('underscore');
 
   var getTpl = function(name) {
       return fs.readFileSync(__dirname + '/' + name).toString();
@@ -15,7 +14,7 @@ module.exports = function(grunt) {
 
   var JSLintXMLReporter = function(filenames, options) {
       this.options = options;
-      if(_.isUndefined(options.jsLintXML)) {
+      if(!options.jsLintXML) {
         throw new Error('Output filename not provided!');
       }
       fs.writeFileSync(options.jsLintXML, "");

@@ -1,6 +1,5 @@
 /*global module:false*/
 var cr = require('complexity-report');
-var _ = require('underscore');
 
 module.exports = function(grunt) {
 
@@ -9,11 +8,25 @@ module.exports = function(grunt) {
 	var JSLintXMLReporter = require('./reporters/JSLintXML')(grunt);
 
 	var Complexity = {
+
 		defaultOptions: {
 			errorsOnly: false,
 			cyclomatic: 3,
 			halstead: 8,
 			maintainability: 100
+		},
+
+		buildReporter: function(files, options) {
+
+			var reporter = new MultiReporter(files, options);
+			reporter.addReporter(ConsoleReporter);
+
+			if(options.jsLintXML) {
+				reporter.addReporter(JSLintXMLReporter);
+			}
+			
+			return reporter;
+
 		},
 
 		isComplicated: function(data, options) {
@@ -85,16 +98,11 @@ module.exports = function(grunt) {
 	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function() {
 
 		var files = this.filesSrc || grunt.file.expandFiles(this.file.src);
-		var options = this.options(defaults);
 
 		// Set defaults
-		var options = _.defaults(this.data.options, Complexity.defaultOptions);
+		var options = this.options(Complexity.defaultOptions);
 
-		var reporter = new MultiReporter(files, options);
-		reporter.addReporter(ConsoleReporter);
-		if(options.jsLintXML) {
-			reporter.addReporter(JSLintXMLReporter);
-		}
+		var reporter = Complexity.buildReporter(files, options);
 
 		Complexity.analyze(reporter, files, options);
 

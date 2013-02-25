@@ -31,8 +31,7 @@
 	},
 	"dependencies": {
 		"grunt": ">=0.4.x",
-		"complexity-report": "0.6.x",
-    "underscore": "1.4.4"
+		"complexity-report": "0.6.x"
 	},
 	"devDependencies": {
 		"mocha": "~1.8.1",
