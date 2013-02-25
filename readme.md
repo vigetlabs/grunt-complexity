@@ -1,10 +1,13 @@
 # Grunt-Complexity
 
-[Still a significant work in progress]
-
 A [grunt](http://github.com/gruntjs/grunt/) task that utilizes
 [complexity-report](https://github.com/philbooth/complexityReport.js)
 to evaluate the complexity and maintainability of code.
+
+## Versions
+
+- Use version 0.0.7 for Grunt 0.3.x
+- Use versions 0.1.x for Grunt 0.4.x
 
 ![screenshot](https://raw.github.com/vigetlabs/grunt-complexity/master/example.png)
 ![screenshot](https://raw.github.com/vigetlabs/grunt-complexity/master/complexity.png)
@@ -25,7 +28,7 @@ Within your grunt file:
 			generic: {
 				src: ['grunt.js', 'tasks/grunt-complexity.js'],
 				options: {
-					jsLintXML: 'report.xml' // use if you want to create XML report (understood by Jenkins Violations plugin)
+					jsLintXML: 'report.xml' // create XML JSLint-like report
 					errorsOnly: false, // show only maintainability errors
 					cyclomatic: 3,
 					halstead: 8,
@@ -44,3 +47,8 @@ Within your grunt file:
 ## What is Cyclomatic and Halstead?
 
 Documentation on this to come. For now, see [jscomplexity.org](http://jscomplexity.org/complexity)
+
+## Contributors
+
+- [Nate Hunzaker](https://github.com/nhunzaker)
+- [Golo Roden](https://github.com/goloroden)

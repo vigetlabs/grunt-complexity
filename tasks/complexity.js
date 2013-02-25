@@ -33,6 +33,7 @@ module.exports = function(grunt) {
 		},
 
 		isMaintainable: function(data, options) {
+
 			var expected = options.maintainability;
 			var actual = data.maintainability;
 
@@ -84,6 +85,7 @@ module.exports = function(grunt) {
 	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function() {
 
 		var files = this.filesSrc || grunt.file.expandFiles(this.file.src);
+		var options = this.options(defaults);
 
 		// Set defaults
 		var options = _.defaults(this.data.options, Complexity.defaultOptions);
