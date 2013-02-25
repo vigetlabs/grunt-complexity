@@ -22,6 +22,9 @@ module.exports = function(grunt) {
     };
 
   JSLintXMLReporter.prototype = {
+    escape: function(message) {
+      return message.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    },
     write: function(message) {
       fs.appendFileSync(this.options.jsLintXML, message);
     },
@@ -30,6 +33,7 @@ module.exports = function(grunt) {
       var message = grunt.template.process(tpl.violation, {
         data: {
           filepath: filepath,
+          escape: this.escape,
           complexFunctions: complexFunctions
         }
       });

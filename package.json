@@ -33,13 +33,13 @@
 	"dependencies": {
 		"grunt": "0.4.x",
 		"complexity-report": "0.6.x",
-    "underscore": "1.4.4",
-    "grunt-simple-mocha": "0.3.x",
-    "grunt-contrib-jshint": "0.1.x"
+    "underscore": "1.4.4"
 	},
 	"devDependencies": {
 		"mocha": "~1.8.1",
-    "chai": "1.4.2"
+    "chai": "1.4.2",
+    "grunt-simple-mocha": "0.3.x",
+    "grunt-contrib-jshint": "0.1.x"
 	},
 	"keywords": [
 		"gruntplugin",

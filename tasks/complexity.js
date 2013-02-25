@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 	var JSLintXMLReporter = require('./reporters/JSLintXML')(grunt);
 
 	var Complexity = {
-		defaultOptions : {
+		defaultOptions: {
 			errorsOnly: false,
 			cyclomatic: 3,
 			halstead: 8,
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
 
 		var reporter = new MultiReporter(files, options);
 		reporter.addReporter(ConsoleReporter);
-		if (options.jsLintXML) {
+		if(options.jsLintXML) {
 			reporter.addReporter(JSLintXMLReporter);
 		}
 
