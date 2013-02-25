@@ -45,3 +45,8 @@ Within your grunt file:
 ## What is Cyclomatic and Halstead?
 
 Documentation on this to come. For now, see [jscomplexity.org](http://jscomplexity.org/complexity)
+
+## Contributors
+
+- [Nate Hunzaker](https://github.com/nhunzaker)
+- [Golo Roden](https://github.com/goloroden)
