@@ -21,10 +21,10 @@ module.exports = function(grunt) {
 			var reporter = new MultiReporter(files, options);
 			reporter.addReporter(ConsoleReporter);
 
-			if(options.jsLintXML) {
+			if (options.jsLintXML) {
 				reporter.addReporter(JSLintXMLReporter);
 			}
-			
+
 			return reporter;
 
 		},
@@ -33,11 +33,11 @@ module.exports = function(grunt) {
 
 			var complicated = false;
 
-			if(data.complexity.cyclomatic > options.cyclomatic) {
+			if (data.complexity.cyclomatic > options.cyclomatic) {
 				complicated = true;
 			}
 
-			if(data.complexity.halstead.difficulty > options.halstead) {
+			if (data.complexity.halstead.difficulty > options.halstead) {
 				complicated = true;
 			}
 
@@ -70,11 +70,11 @@ module.exports = function(grunt) {
 
 			var valid = this.isMaintainable(analysis, options);
 
-			if(!options.errorsOnly || !valid) {
+			if (!options.errorsOnly || !valid) {
 				reporter.maintainability(filepath, valid, analysis);
 			}
 
-			if(!valid) {
+			if (!valid) {
 				grunt.fail.errorcount++;
 			}
 
