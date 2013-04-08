@@ -52,3 +52,4 @@ Documentation on this to come. For now, see [jscomplexity.org](http://jscomplexi
 
 - [Nate Hunzaker](https://github.com/nhunzaker)
 - [Golo Roden](https://github.com/goloroden)
+- [tomusdrw](https://github.com/tomusdrw)
