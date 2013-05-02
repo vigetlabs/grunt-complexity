@@ -28,7 +28,7 @@ Within your grunt file:
 			generic: {
 				src: ['grunt.js', 'tasks/grunt-complexity.js'],
 				options: {
-					jsLintXML: 'report.xml' // create XML JSLint-like report
+					jsLintXML: 'report.xml', // create XML JSLint-like report
 					errorsOnly: false, // show only maintainability errors
 					cyclomatic: 3,
 					halstead: 8,
