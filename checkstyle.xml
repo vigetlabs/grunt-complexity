@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<checkstyle>
+
+<file name="Gruntfile.js">
+  
+</file>
+
+
+
+<file name="tasks/complexity.js">
+  
+</file>
+
+
+
+<file name="tasks/reporters/CheckstyleXML/index.js">
+  
+</file>
+
+
+
+<file name="tasks/reporters/Console/helpers.js">
+  
+</file>
+
+
+
+<file name="tasks/reporters/Console/index.js">
+  
+</file>
+
+
+
+<file name="tasks/reporters/JSLintXML/index.js">
+  
+</file>
+
+
+
+<file name="tasks/reporters/XML/index.js">
+  
+</file>
+
+
+
+<file name="tasks/reporters/multi.js">
+  
+</file>
+
+
+
+<file name="test/XmlReporter-test.js">
+  
+</file>
+
+
+
+<file name="test/complexity-test.js">
+  
+</file>
+
+
+
+<file name="test/console.helpers-test.js">
+  
+</file>
+
+
+
+<file name="test/multiReporter-test.js">
+  
+</file>
+
+
+
+</checkstyle>
