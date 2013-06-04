@@ -36,7 +36,7 @@ Within your grunt file:
 				}
 			}
 		}
-		
+
 
 	});
 
@@ -48,8 +48,15 @@ Within your grunt file:
 
 Documentation on this to come. For now, see [jscomplexity.org](http://jscomplexity.org/complexity)
 
+## Contributing
+
+This repo has a submodule, so after you `npm install`, you'll want to `git submodule init` and `git submodule update`.
+
+Then, you should `cd test/grunt.0.4` and `npm install`.
+
 ## Contributors
 
 - [Nate Hunzaker](https://github.com/nhunzaker)
 - [Golo Roden](https://github.com/goloroden)
 - [tomusdrw](https://github.com/tomusdrw)
+- [averyvery](https://github.com/averyvery)
