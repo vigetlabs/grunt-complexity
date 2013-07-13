@@ -51,9 +51,12 @@ Documentation on this to come. For now, see [jscomplexity.org](http://jscomplexi
 
 ## Contributing
 
-This repo has a submodule, so after you `npm install`, you'll want to `git submodule init` and `git submodule update`.
+Run `./setup-dev.sh`, which does the following:
 
-Then, you should `cd test/grunt.0.4` and `npm install`.
+- `npm install`
+- `git submodule init --update`
+- `cd test/grunt.0.4`
+- `npm install`
 
 ## Contributors
 

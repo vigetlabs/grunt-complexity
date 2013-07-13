@@ -27,7 +27,7 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "grunt simplemocha"
   },
   "dependencies": {
     "grunt": ">=0.4.x",
