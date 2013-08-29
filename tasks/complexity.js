@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 	var Complexity = {
 
 		defaultOptions: {
+			breakOnErrors: true,
 			errorsOnly: false,
 			cyclomatic: 3,
 			halstead: 8,
@@ -112,7 +113,7 @@ module.exports = function(grunt) {
 
 		Complexity.analyze(reporter, files, options);
 
-		return this.errorCount === 0;
+		return options.breakOnErrors === false || this.errorCount === 0;
 
 	});
 
