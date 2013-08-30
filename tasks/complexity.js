@@ -63,7 +63,7 @@ module.exports = function(grunt) {
 
 		assignSeverity: function(data, options) {
 			var levels = [
-					'ignore',
+					'info',
 					'warning',
 					'error'
 				];
