@@ -14,8 +14,8 @@ module.exports = function(grunt) {
 		defaultOptions: {
 			breakOnErrors: true,
 			errorsOnly: false,
-			cyclomatic: 3,
-			halstead: 8,
+			cyclomatic: [3, 7, 12],
+			halstead: [8, 13, 20],
 			maintainability: 100
 		},
 
@@ -40,11 +40,11 @@ module.exports = function(grunt) {
 
 			var complicated = false;
 
-			if (data.complexity.cyclomatic > options.cyclomatic) {
+			if (data.complexity.cyclomatic > options.cyclomatic[0]) {
 				complicated = true;
 			}
 
-			if (data.complexity.halstead.difficulty > options.halstead) {
+			if (data.complexity.halstead.difficulty > options.halstead[0]) {
 				complicated = true;
 			}
 
@@ -61,10 +61,27 @@ module.exports = function(grunt) {
 
 		},
 
-		reportComplexity: function(reporter, analysis, filepath, options) {
+		assignSeverity: function(data, options) {
+			var levels = [
+					'ignore',
+					'warning',
+					'error'
+				];
 
+			levels.forEach(function(level, i) {
+				if (data.complexity.cyclomatic > options.cyclomatic[i] || data.complexity.halstead.difficulty > options.halstead[i]) {
+					data.severity = levels[i];
+				}
+			});
+
+			return data;
+		},
+
+		reportComplexity: function(reporter, analysis, filepath, options) {
 			var complicatedFunctions = analysis.functions.filter(function(data) {
 				return this.isComplicated(data, options);
+			}, this).map(function(data) {
+				return this.assignSeverity(data, options);
 			}, this);
 
 			grunt.fail.errorcount += complicatedFunctions.length;

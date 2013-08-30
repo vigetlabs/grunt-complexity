@@ -2,7 +2,7 @@
   <% complexFunctions.forEach(function(data){ %>
   <error
     line="<%= data.line %>"
-    severity="warning"
+    severity="<%= data.severity %>"
     message="Cyclomatic: <%= data.complexity.cyclomatic %>,
     Halstead: <%= data.complexity.halstead.difficulty.toPrecision(5) %>
     | Effort: <%= data.complexity.halstead.effort.toPrecision(5) %>
