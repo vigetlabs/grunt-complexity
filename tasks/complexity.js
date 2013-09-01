@@ -68,11 +68,18 @@ module.exports = function(grunt) {
 					'error'
 				];
 
-			levels.forEach(function(level, i) {
-				if (data.complexity.cyclomatic > options.cyclomatic[i] || data.complexity.halstead.difficulty > options.halstead[i]) {
-					data.severity = levels[i];
+			if (options.cyclomatic.length === 1 && options.halstead.length === 1) {
+				// backward compatibility here: any issue will raise a warning
+				if (data.complexity.cyclomatic > options.cyclomatic[0] || data.complexity.halstead.difficulty > options.halstead[0]) {
+					data.severity = 'warning';
 				}
-			});
+			} else {
+				levels.forEach(function(level, i) {
+					if (data.complexity.cyclomatic > options.cyclomatic[i] || data.complexity.halstead.difficulty > options.halstead[i]) {
+						data.severity = levels[i];
+					}
+				});
+			}
 
 			return data;
 		},
@@ -125,6 +132,19 @@ module.exports = function(grunt) {
 
 		// Set defaults
 		var options = this.options(Complexity.defaultOptions);
+
+		// Handle backward compatibility of thresholds
+		if (options.cyclomatic instanceof Array === false) {
+			options.cyclomatic = [
+				options.cyclomatic
+			];
+		}
+
+		if (options.halstead instanceof Array === false) {
+			options.halstead = [
+				options.halstead
+			];
+		}
 
 		var reporter = Complexity.buildReporter(files, options);
 
