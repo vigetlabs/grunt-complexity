@@ -12,9 +12,10 @@ module.exports = function(grunt) {
 	var Complexity = {
 
 		defaultOptions: {
+			breakOnErrors: true,
 			errorsOnly: false,
-			cyclomatic: 3,
-			halstead: 8,
+			cyclomatic: [3, 7, 12],
+			halstead: [8, 13, 20],
 			maintainability: 100
 		},
 
@@ -39,11 +40,11 @@ module.exports = function(grunt) {
 
 			var complicated = false;
 
-			if (data.complexity.cyclomatic > options.cyclomatic) {
+			if (data.complexity.cyclomatic > options.cyclomatic[0]) {
 				complicated = true;
 			}
 
-			if (data.complexity.halstead.difficulty > options.halstead) {
+			if (data.complexity.halstead.difficulty > options.halstead[0]) {
 				complicated = true;
 			}
 
@@ -60,10 +61,34 @@ module.exports = function(grunt) {
 
 		},
 
-		reportComplexity: function(reporter, analysis, filepath, options) {
+		assignSeverity: function(data, options) {
+			var levels = [
+					'info',
+					'warning',
+					'error'
+				];
 
+			if (options.cyclomatic.length === 1 && options.halstead.length === 1) {
+				// backward compatibility here: any issue will raise a warning
+				if (data.complexity.cyclomatic > options.cyclomatic[0] || data.complexity.halstead.difficulty > options.halstead[0]) {
+					data.severity = 'warning';
+				}
+			} else {
+				levels.forEach(function(level, i) {
+					if (data.complexity.cyclomatic > options.cyclomatic[i] || data.complexity.halstead.difficulty > options.halstead[i]) {
+						data.severity = levels[i];
+					}
+				});
+			}
+
+			return data;
+		},
+
+		reportComplexity: function(reporter, analysis, filepath, options) {
 			var complicatedFunctions = analysis.functions.filter(function(data) {
 				return this.isComplicated(data, options);
+			}, this).map(function(data) {
+				return this.assignSeverity(data, options);
 			}, this);
 
 			grunt.fail.errorcount += complicatedFunctions.length;
@@ -108,11 +133,24 @@ module.exports = function(grunt) {
 		// Set defaults
 		var options = this.options(Complexity.defaultOptions);
 
+		// Handle backward compatibility of thresholds
+		if (options.cyclomatic instanceof Array === false) {
+			options.cyclomatic = [
+				options.cyclomatic
+			];
+		}
+
+		if (options.halstead instanceof Array === false) {
+			options.halstead = [
+				options.halstead
+			];
+		}
+
 		var reporter = Complexity.buildReporter(files, options);
 
 		Complexity.analyze(reporter, files, options);
 
-		return this.errorCount === 0;
+		return options.breakOnErrors === false || this.errorCount === 0;
 
 	});
 
