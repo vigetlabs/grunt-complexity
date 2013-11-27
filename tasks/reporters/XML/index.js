@@ -1,63 +1,67 @@
 module.exports = function(grunt) {
 
-  var XMLReporter = function() {};
-  var fs = require('fs');
+	var XMLReporter = function() {};
+	var fs = require('fs');
 
-  XMLReporter.prototype = {
-    init: function(options, fileKey, dirname) {
-      this.options = options;
-      this.xmlFilename = options[fileKey];
-      if(!this.xmlFilename) {
-        throw new Error('Output filename not provided!');
-      }
-      this.dirname = dirname;
-      this.tpl = this.getTpl();
-      fs.writeFileSync(this.xmlFilename, "");
-    },
+	XMLReporter.prototype = {
+		init: function(options, fileKey, dirname) {
+			this.options = options;
+			this.xmlFilename = options[fileKey];
 
-    readTpl: function(name) {
-      return fs.readFileSync(this.dirname + '/' + name).toString();
-    },
+			if(!this.xmlFilename) {
+				throw new Error('Output filename not provided!');
+			}
 
-    getTpl: function() {
-      return {
-        opening: this.readTpl('opening.xml_'),
-        ending: this.readTpl('ending.xml_'),
-        violation: this.readTpl('violation.xml_')
-      };
-    },
+			this.dirname = dirname;
+			this.tpl = this.getTpl();
 
-    escape: function(message) {
-      return message.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    },
+			fs.writeFileSync(this.xmlFilename, "");
+		},
 
-    write: function(message) {
-      fs.appendFileSync(this.xmlFilename, message);
-    },
+		readTpl: function(name) {
+			return fs.readFileSync(this.dirname + '/' + name).toString();
+		},
 
-    complexity: function(filepath, complexFunctions) {
-      var message = grunt.template.process(this.tpl.violation, {
-        data: {
-          filepath: filepath,
-          escape: this.escape,
-          complexFunctions: complexFunctions
-        }
-      });
-      this.write(message);
-    },
+		getTpl: function() {
+			return {
+				opening: this.readTpl('opening.xml_'),
+				ending: this.readTpl('ending.xml_'),
+				violation: this.readTpl('violation.xml_')
+			};
+		},
 
-    maintainability: function(filepath, valid, analysis) {
-      // Maintainability is not written at all
-    },
+		escape: function(message) {
+			return message.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+		},
 
-    start: function() {
-      this.write(this.tpl.opening);
-    },
+		write: function(message) {
+			fs.appendFileSync(this.xmlFilename, message);
+		},
 
-    finish: function() {
-      this.write(this.tpl.ending);
-    }
-  };
+		complexity: function(filepath, complexFunctions) {
+			var message = grunt.template.process(this.tpl.violation, {
+				data: {
+					filepath: filepath,
+					escape: this.escape,
+					complexFunctions: complexFunctions
+				}
+			});
 
-  return XMLReporter;
+			this.write(message);
+		},
+
+		maintainability: function(filepath, valid, analysis) {
+			// Maintainability is not written at all
+		},
+
+		start: function() {
+			this.write(this.tpl.opening);
+		},
+
+		finish: function() {
+			this.write(this.tpl.ending);
+		}
+	};
+
+	return XMLReporter;
 };
