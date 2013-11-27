@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-simple-mocha');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 
-	grunt.registerTask('default', ['jshint', 'simplemocha', 'complexity']);
+	grunt.registerTask('default', ['jshint', 'complexity']);
 
 	// Used for testing only, you shouldn't add this to your code:
 	grunt.loadTasks('tasks');
