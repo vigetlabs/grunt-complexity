@@ -109,7 +109,6 @@ module.exports = function(grunt) {
 		},
 
 		reportMaintainability: function(reporter, analysis, filepath, options) {
-
 			var valid = this.isMaintainable(analysis, options);
 
 			if (!options.errorsOnly || !valid) {
@@ -119,7 +118,6 @@ module.exports = function(grunt) {
 			if (!valid) {
 				grunt.fail.errorcount++;
 			}
-
 		},
 
 		analyze: function(reporter, files, options) {
@@ -138,7 +136,6 @@ module.exports = function(grunt) {
 	};
 
 	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function() {
-
 		var files = this.filesSrc || grunt.file.expandFiles(this.file.src);
 
 		// Set defaults
@@ -149,7 +146,6 @@ module.exports = function(grunt) {
 		Complexity.analyze(reporter, files, options);
 
 		return options.breakOnErrors === false || this.errorCount === 0;
-
 	});
 
 	return Complexity;

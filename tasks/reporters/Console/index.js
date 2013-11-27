@@ -1,56 +1,55 @@
 module.exports = function(grunt) {
+	var bodyTemplate = require('fs').readFileSync(__dirname + '/reporter.tpl').toString();
+	var template = grunt.template.process;
 
-  var bodyTemplate = require('fs').readFileSync(__dirname + '/reporter.tpl').toString();
-  var helpers = require('./helpers');
+	var helpers = require('./helpers');
 
-  var ConsoleReporter = function(filenames, options) {
-      this.options = options;
-      this.tableLength = helpers.longestString(filenames);
-    };
+	var ConsoleReporter = function(filenames, options) {
+		this.options = options;
+		this.tableLength = helpers.longestString(filenames);
+	};
 
-  ConsoleReporter.prototype = {
+	ConsoleReporter.prototype = {
 
-    maintainabilityMessage: function(filepath, valid, analysis) {
+		maintainabilityMessage: function(filepath, valid, analysis) {
+			var symbol = valid ? '\u2713'.green : '\u2717'.red;
+			var bar = helpers.generateBar(analysis.maintainability, this.options.maintainability);
+			var label = helpers.fitWhitespace(this.tableLength, filepath);
 
-      var symbol = valid ? '\u2713'.green : '\u2717'.red;
+			return symbol + ' ' + label + bar;
+		},
 
-      var bar = helpers.generateBar(analysis.maintainability, this.options.maintainability);
-      var label = helpers.fitWhitespace(this.tableLength, filepath);
+		complexity: function(filepath, complexFunctions) {
+			complexFunctions.forEach(function(data) {
+				data.filepath = filepath;
 
-      return symbol + ' ' + label + bar;
+				var message = template(bodyTemplate, {
+					data: data
+				});
 
-    },
+				this.log(message.yellow);
 
-    complexity: function(filepath, complexFunctions) {
-      complexFunctions.forEach(function(data) {
-        data.filepath = filepath;
-        var message = grunt.template.process(bodyTemplate, {
-          data: data
-        });
+			}, this);
+		},
 
-        this.log(message.yellow);
+		maintainability: function(filepath, valid, analysis) {
+			var message = this.maintainabilityMessage(filepath, valid, analysis);
+			this.log(message);
+		},
 
-      }, this);
-    },
+		start: function() {
+			this.log(' ');
+		},
 
-    maintainability: function(filepath, valid, analysis) {
-      var message = this.maintainabilityMessage(filepath, valid, analysis);
-      this.log(message);
-    },
+		finish: function() {},
 
-    start: function() {
-      this.log(' ');
-    },
+		log: function(message, display) {
+			message = message || '';
+			grunt.log.writeln(message);
+		}
 
-    finish: function() {},
-
-    log: function(message, display) {
-      message = message || '';
-      grunt.log.writeln(message);
-    }
-
-  };
+	};
 
 
-  return ConsoleReporter;
+	return ConsoleReporter;
 };
