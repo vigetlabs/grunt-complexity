@@ -4,6 +4,17 @@ describe("Complexity task", function() {
 	var cut = require('../tasks/complexity')(grunt);
 	var expect = require('chai').expect;
 
+	it ("can normalize options to allow for multiple levels of error reporting", function() {
+
+		var normalized = cut.normalizeOptions({
+			cyclomatic: 3,
+			halstead: 9
+		});
+
+		expect(normalized.cyclomatic).to.eql([3]);
+		expect(normalized.halstead).to.eql([9]);
+	});
+
 	describe("isComplicated", function() {
 		var data = {
 			complexity: {
@@ -16,10 +27,10 @@ describe("Complexity task", function() {
 
 		it('should return true if cyclomatic complexity is greater than in options', function() {
 			// given
-			var options = {
+			var options = cut.normalizeOptions({
 				cyclomatic: 3,
 				halstead: 8
-			};
+			});
 
 			// when
 			var isComplicated = cut.isComplicated(data, options);
@@ -30,10 +41,10 @@ describe("Complexity task", function() {
 
 		it('should return true if halstead is greater than in options', function() {
 			// given
-			var options = {
+			var options = cut.normalizeOptions({
 				cyclomatic: 6,
 				halstead: 3
-			};
+			});
 
 			// when
 			var isComplicated = cut.isComplicated(data, options);
@@ -44,10 +55,10 @@ describe("Complexity task", function() {
 
 		it('should return false if no metric is greater than in options', function() {
 			// given
-			var options = {
+			var options = cut.normalizeOptions({
 				cyclomatic: 6,
 				halstead: 8
-			};
+			});
 
 			// when
 			var isComplicated = cut.isComplicated(data, options);

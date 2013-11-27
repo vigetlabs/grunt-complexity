@@ -19,6 +19,23 @@ module.exports = function(grunt) {
 			maintainability: 100
 		},
 
+		normalizeOptions: function(options) {
+			// Handle backward compatibility of thresholds
+			if (options.cyclomatic instanceof Array === false) {
+				options.cyclomatic = [
+					options.cyclomatic
+				];
+			}
+
+			if (options.halstead instanceof Array === false) {
+				options.halstead = [
+					options.halstead
+				];
+			}
+
+			return options;
+		},
+
 		buildReporter: function(files, options) {
 
 			var reporter = new MultiReporter(files, options);
@@ -131,20 +148,7 @@ module.exports = function(grunt) {
 		var files = this.filesSrc || grunt.file.expandFiles(this.file.src);
 
 		// Set defaults
-		var options = this.options(Complexity.defaultOptions);
-
-		// Handle backward compatibility of thresholds
-		if (options.cyclomatic instanceof Array === false) {
-			options.cyclomatic = [
-				options.cyclomatic
-			];
-		}
-
-		if (options.halstead instanceof Array === false) {
-			options.halstead = [
-				options.halstead
-			];
-		}
+		var options = Complexity.normalizeOptions(this.options(Complexity.defaultOptions));
 
 		var reporter = Complexity.buildReporter(files, options);
 
