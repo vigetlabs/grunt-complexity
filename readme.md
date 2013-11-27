@@ -61,3 +61,4 @@ Then, you should `cd test/grunt.0.4` and `npm install`.
 - [Golo Roden](https://github.com/goloroden)
 - [tomusdrw](https://github.com/tomusdrw)
 - [averyvery](https://github.com/averyvery)
+- [jzsfkzm](https://github.com/jzsfkzm)
