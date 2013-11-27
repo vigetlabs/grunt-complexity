@@ -37,7 +37,6 @@ module.exports = function(grunt) {
 		},
 
 		buildReporter: function(files, options) {
-
 			var reporter = new MultiReporter(files, options);
 			reporter.addReporter(ConsoleReporter);
 
@@ -50,11 +49,9 @@ module.exports = function(grunt) {
 			}
 
 			return reporter;
-
 		},
 
 		isComplicated: function(data, options) {
-
 			var complicated = false;
 
 			if (data.complexity.cyclomatic > options.cyclomatic[0]) {
@@ -66,24 +63,21 @@ module.exports = function(grunt) {
 			}
 
 			return complicated;
-
 		},
 
 		isMaintainable: function(data, options) {
-
 			var expected = options.maintainability;
 			var actual = data.maintainability;
 
 			return expected < actual;
-
 		},
 
 		assignSeverity: function(data, options) {
 			var levels = [
-					'info',
-					'warning',
-					'error'
-				];
+				'info',
+				'warning',
+				'error'
+			];
 
 			if (options.cyclomatic.length === 1 && options.halstead.length === 1) {
 				// backward compatibility here: any issue will raise a warning

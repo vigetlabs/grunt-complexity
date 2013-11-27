@@ -12,10 +12,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		simplemocha: {
-			all: { src: 'test/*.js' }
-		},
-
 		jshint: {
 			all: '<%= files %>'
 		},
@@ -25,7 +21,7 @@ module.exports = function(grunt) {
 		}
 
 	});
-	grunt.loadNpmTasks('grunt-simple-mocha');
+
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 
 	grunt.registerTask('default', ['jshint', 'complexity']);
