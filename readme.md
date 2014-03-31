@@ -56,10 +56,13 @@ This repo has a submodule, so after you `npm install`, you'll want to `git submo
 
 Then, you should `cd test/grunt.0.4` and `npm install`.
 
+Tests can be run with `mocha`.
+
 ## Contributors
 
-- [Nate Hunzaker](https://github.com/nhunzaker)
-- [Golo Roden](https://github.com/goloroden)
-- [tomusdrw](https://github.com/tomusdrw)
-- [averyvery](https://github.com/averyvery)
-- [jzsfkzm](https://github.com/jzsfkzm)
+- Nate Hunzaker([nhunzaker](https://github.com/nhunzaker))
+- Golo Roden ([goloroden](https://github.com/goloroden))
+- Tomasz Drwięga ([tomusdrw](https://github.com/tomusdrw))
+- Doug Avery ([averyvery](https://github.com/averyvery))
+- Jozsef Kozma ([jzsfkzm](https://github.com/jzsfkzm))
+- Patrick Williams [(pwmckenna](https://github.com/pwmckenna))
