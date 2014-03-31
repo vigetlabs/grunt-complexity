@@ -123,12 +123,17 @@ module.exports = function(grunt) {
 		analyze: function(reporter, files, options) {
 			reporter.start();
 
-			files.forEach(function(filepath) {
+			files.map(function(filepath) {
 				var content = grunt.file.read(filepath);
-				var analysis = cr.run(content, options);
-
-				this.reportMaintainability(reporter, analysis, filepath, options);
-				this.reportComplexity(reporter, analysis, filepath, options);
+				return {
+					filepath: filepath,
+					analysis: cr.run(content, options)
+				};
+			}).sort(function (info1, info2) {
+				return info1.analysis.maintainability - info2.analysis.maintainability;
+			}).forEach(function (info) {
+				this.reportMaintainability(reporter, info.analysis, info.filepath, options);
+				this.reportComplexity(reporter, info.analysis, info.filepath, options);
 			}, this);
 
 			reporter.finish();
