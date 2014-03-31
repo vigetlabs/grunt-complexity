@@ -9,28 +9,6 @@
 
 <file name="tasks/complexity.js">
   
-  <error
-    line="22"
-    severity="warning"
-    message="Cyclomatic: 3,
-    Halstead: 11.667
-    | Effort: 1597.4
-    | Volume: 136.92
-    | Vocabulary: 13"
-    source="normalizeOptions"
-    />
-  
-  <error
-    line="75"
-    severity="warning"
-    message="Cyclomatic: 3,
-    Halstead: 14.219
-    | Effort: 4558.9
-    | Volume: 320.63
-    | Vocabulary: 29"
-    source="assignSeverity"
-    />
-  
 </file>
 
 

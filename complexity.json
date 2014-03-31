@@ -1,10 +1,10 @@
 {
-  "src": "<%= files %>",
-  "options": {
-    "jsLintXML": "report.xml",
-    "checkstyleXML": "checkstyle.xml",
-    "cyclomatic": 3,
-    "halstead": 8,
-    "maintainability": 100
-  }
+    "src": "<%= files %>",
+    "options": {
+        "jsLintXML": "report.xml",
+        "checkstyleXML": "checkstyle.xml",
+        "cyclomatic": 3,
+        "halstead": 8,
+        "maintainability": 100
+    }
 }
