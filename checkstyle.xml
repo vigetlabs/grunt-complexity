@@ -35,37 +35,13 @@
 
 
 
-<file name="tasks/reporters/CheckstyleXML/index.js">
+<file name="test/complexity-test.js">
   
 </file>
 
 
 
-<file name="tasks/reporters/Console/helpers.js">
-  
-</file>
-
-
-
-<file name="tasks/reporters/Console/index.js">
-  
-</file>
-
-
-
-<file name="tasks/reporters/JSLintXML/index.js">
-  
-</file>
-
-
-
-<file name="tasks/reporters/XML/index.js">
-  
-</file>
-
-
-
-<file name="tasks/reporters/multi.js">
+<file name="test/multiReporter-test.js">
   
 </file>
 
@@ -77,7 +53,19 @@
 
 
 
-<file name="test/complexity-test.js">
+<file name="tasks/reporters/Console/index.js">
+  
+</file>
+
+
+
+<file name="tasks/reporters/XML/index.js">
+  
+</file>
+
+
+
+<file name="tasks/reporters/Console/helpers.js">
   
 </file>
 
@@ -89,7 +77,19 @@
 
 
 
-<file name="test/multiReporter-test.js">
+<file name="tasks/reporters/multi.js">
+  
+</file>
+
+
+
+<file name="tasks/reporters/JSLintXML/index.js">
+  
+</file>
+
+
+
+<file name="tasks/reporters/CheckstyleXML/index.js">
   
 </file>
 
