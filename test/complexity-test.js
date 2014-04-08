@@ -17,11 +17,9 @@ describe("Complexity task", function() {
 
 	describe("isComplicated", function() {
 		var data = {
-			complexity: {
-				cyclomatic: 5,
-				halstead: {
-					difficulty: 7
-				}
+			cyclomatic: 5,
+			halstead: {
+				difficulty: 7
 			}
 		};
 

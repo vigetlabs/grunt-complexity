@@ -1,8 +1,7 @@
 /*global module:false*/
-var cr = require('complexity-report');
+var escomplex = require('escomplex-js');
 
 module.exports = function(grunt) {
-
 	var MultiReporter = require('./reporters/multi')(grunt);
 	var ConsoleReporter = require('./reporters/Console')(grunt);
 	var XMLReporter = require('./reporters/XML')(grunt);
@@ -10,7 +9,6 @@ module.exports = function(grunt) {
 	var checkstyleReporter = require('./reporters/CheckstyleXML')(grunt, XMLReporter);
 
 	var Complexity = {
-
 		defaultOptions: {
 			breakOnErrors: true,
 			errorsOnly: false,
@@ -55,11 +53,11 @@ module.exports = function(grunt) {
 		isComplicated: function(data, options) {
 			var complicated = false;
 
-			if (data.complexity.cyclomatic > options.cyclomatic[0]) {
+			if (data.cyclomatic > options.cyclomatic[0]) {
 				complicated = true;
 			}
 
-			if (data.complexity.halstead.difficulty > options.halstead[0]) {
+			if (data.halstead.difficulty > options.halstead[0]) {
 				complicated = true;
 			}
 
@@ -82,12 +80,12 @@ module.exports = function(grunt) {
 
 			if (options.cyclomatic.length === 1 && options.halstead.length === 1) {
 				// backward compatibility here: any issue will raise a warning
-				if (data.complexity.cyclomatic > options.cyclomatic[0] || data.complexity.halstead.difficulty > options.halstead[0]) {
+				if (data.cyclomatic > options.cyclomatic[0] || data.halstead.difficulty > options.halstead[0]) {
 					data.severity = 'warning';
 				}
 			} else {
 				levels.forEach(function(level, i) {
-					if (data.complexity.cyclomatic > options.cyclomatic[i] || data.complexity.halstead.difficulty > options.halstead[i]) {
+					if (data.cyclomatic > options.cyclomatic[i] || data.halstead.difficulty > options.halstead[i]) {
 						data.severity = levels[i];
 					}
 				});
@@ -110,7 +108,6 @@ module.exports = function(grunt) {
 			grunt.fail.errorcount += complicatedFunctions.length;
 
 			reporter.complexity(filepath, complicatedFunctions);
-
 		},
 
 		reportMaintainability: function(reporter, analysis, filepath, options) {
@@ -130,9 +127,11 @@ module.exports = function(grunt) {
 
 			files.map(function(filepath) {
 				var content = grunt.file.read(filepath);
+				var analysis = escomplex.analyse(content, options);
+
 				return {
 					filepath: filepath,
-					analysis: cr.run(content, options)
+					analysis: analysis
 				};
 			}).sort(function (info1, info2) {
 				return info1.analysis.maintainability - info2.analysis.maintainability;
@@ -159,5 +158,4 @@ module.exports = function(grunt) {
 	});
 
 	return Complexity;
-
 };

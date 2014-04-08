@@ -1,7 +1,6 @@
 module.exports = function(grunt) {
 	var bodyTemplate = require('fs').readFileSync(__dirname + '/reporter.tpl').toString();
 	var template = grunt.template.process;
-
 	var helpers = require('./helpers');
 
 	var ConsoleReporter = function(filenames, options) {
@@ -28,7 +27,6 @@ module.exports = function(grunt) {
 				});
 
 				this.log(message.yellow);
-
 			}, this);
 		},
 
