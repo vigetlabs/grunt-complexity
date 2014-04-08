@@ -19,6 +19,7 @@ module.exports = function(grunt) {
 			generic: grunt.file.readJSON('complexity.json')
 		}
 	});
+
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 
 	grunt.registerTask('default', ['jshint', 'complexity']);
