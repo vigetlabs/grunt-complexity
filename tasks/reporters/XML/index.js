@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 		init: function(options, fileKey, dirname) {
 			this.options = options;
 			this.xmlFilename = options[fileKey];
-			
+
       if(!this.xmlFilename) {
 				throw new Error('Output filename not provided!');
 			}
@@ -15,15 +15,14 @@ module.exports = function(grunt) {
 			this.dirname = dirname;
 			this.tpl = this.getTpl();
 
-      var outputDir = this.xmlFilename.split('/').splice(0, this.xmlFilename.split('/').length - 1).join('/');
+      var outputDir = this.xmlFilename.split('/')
+											.splice(0, this.xmlFilename.split('/').length - 1).join('/');
 
       if (outputDir !== '') {
-        fs.mkdirp(outputDir, function() {
-          fs.writeFileSync(this.xmlFilename, '');
-        });
-      } else {
-        fs.writeFileSync(this.xmlFilename, '');
+        fs.mkdirpSync(outputDir);
       }
+
+      fs.writeFileSync(this.xmlFilename, '');
 		},
 
 		readTpl: function(name) {
