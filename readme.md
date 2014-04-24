@@ -68,4 +68,4 @@ Tests can be run with `mocha`.
 - Jozsef Kozma ([jzsfkzm](https://github.com/jzsfkzm))
 - Patrick Williams [(pwmckenna](https://github.com/pwmckenna))
 - Luís Couto ([Couto](https://github.com/Couto))
-- Roman Liutikov [roman01la](https://github.com/roman01la)
+- Roman Liutikov ([roman01la](https://github.com/roman01la))
