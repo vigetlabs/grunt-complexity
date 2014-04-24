@@ -1,7 +1,8 @@
 module.exports = function(grunt) {
 
 	var XMLReporter = function() {};
-	var fs = require('fs');
+	var fs = require('fs-extra'),
+			path = require('path');
 
 	XMLReporter.prototype = {
 		init: function(options, fileKey, dirname) {
@@ -15,7 +16,13 @@ module.exports = function(grunt) {
 			this.dirname = dirname;
 			this.tpl = this.getTpl();
 
-			fs.writeFileSync(this.xmlFilename, "");
+			var outputDir = path.dirname(this.xmlFilename);
+
+			if (outputDir !== '') {
+				fs.mkdirpSync(outputDir);
+			}
+
+			fs.writeFileSync(this.xmlFilename, '');
 		},
 
 		readTpl: function(name) {
