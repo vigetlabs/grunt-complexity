@@ -1,5 +1,4 @@
 describe("Complexity task", function() {
-
 	var grunt = require('./grunt.0.4');
 	var cut = require('../tasks/complexity')(grunt);
 	var expect = require('chai').expect;

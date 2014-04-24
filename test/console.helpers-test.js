@@ -1,4 +1,4 @@
-var ConsoleHelpers = require('../tasks/reporters/Console/helpers.js');
+var ConsoleHelpers = require('../src/reporters/Console/helpers.js');
 var expect = require('chai').expect;
 
 describe("Utility methods", function() {

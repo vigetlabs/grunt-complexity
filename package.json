@@ -31,14 +31,13 @@
   },
   "dependencies": {
     "grunt": ">=0.4.x",
-    "escomplex-js": "^0.1.1"
+    "escomplex-js": "^0.1.1",
+    "underscore": "^1.6.0"
   },
   "devDependencies": {
     "mocha": "~1.8.1",
     "chai": "1.4.2",
-    "grunt": ">=0.4.1",
-    "grunt-contrib-jshint": "0.1.x",
-    "grunt-complexity": "https://github.com/vigetlabs/grunt-complexity/tarball/master"
+    "grunt-contrib-jshint": "0.1.x"
   },
   "keywords": [
     "gruntplugin",

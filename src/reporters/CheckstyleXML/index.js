@@ -1,9 +1,7 @@
-module.exports = function(grunt, XMLReporter) {
-	var checkstyleReporter = function(filenames, options) {
-		this.init(options, 'checkstyleXML', __dirname);
-	};
+var XMLReporter = require('../XML');
 
-	checkstyleReporter.prototype = new XMLReporter();
-
-	return checkstyleReporter;
+var CheckstyleReporter = module.exports = function(filenames, options) {
+	this.init(options, 'checkstyleXML', __dirname);
 };
+
+CheckstyleReporter.prototype = new XMLReporter();

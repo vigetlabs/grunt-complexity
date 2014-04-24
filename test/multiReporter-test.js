@@ -1,6 +1,6 @@
 describe('MultiReporter', function() {
 	var grunt = require('./grunt.0.4');
-	var MultiReporter = require('../tasks/reporters/multi')(grunt);
+	var MultiReporter = require('../src/reporters/multi')(grunt);
 	var expect = require('chai').expect;
 
 	it ('should create object and pass filenames and options', function() {

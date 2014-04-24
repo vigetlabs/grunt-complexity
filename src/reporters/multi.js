@@ -1,40 +1,33 @@
-module.exports = function(grunt) {
+var MultiReporter = module.exports = function(filenames, options) {
+	this.filenames = filenames;
+	this.options = options;
+	this.reporters = [];
+};
 
-	var MultiReporter = function(filenames, options) {
-		this.filenames = filenames;
-		this.options = options;
-		this.reporters = [];
-	};
+MultiReporter.prototype = {
+	addReporter: function(ReporterConstructor) {
+		this.reporters.push(new ReporterConstructor(this.filenames, this.options));
+	},
 
-	MultiReporter.prototype = {
+	invoke: function(methodName, argumentsArray) {
+		this.reporters.forEach(function(reporter) {
+			reporter[methodName].apply(reporter, argumentsArray);
+		});
+	},
 
-		addReporter: function(ReporterConstructor) {
-			this.reporters.push(new ReporterConstructor(this.filenames, this.options));
-		},
+	complexity: function(filepath, complexFunctions) {
+		this.invoke('complexity', [filepath, complexFunctions]);
+	},
 
-		invoke: function(methodName, argumentsArray) {
-			this.reporters.forEach(function(reporter) {
-				reporter[methodName].apply(reporter, argumentsArray);
-			});
-		},
+	maintainability: function(filepath, valid, analysis) {
+		this.invoke('maintainability', [filepath, valid, analysis]);
+	},
 
-		complexity: function(filepath, complexFunctions) {
-			this.invoke('complexity', [filepath, complexFunctions]);
-		},
+	start: function() {
+		this.invoke('start');
+	},
 
-		maintainability: function(filepath, valid, analysis) {
-			this.invoke('maintainability', [filepath, valid, analysis]);
-		},
-
-		start: function() {
-			this.invoke('start');
-		},
-
-		finish: function() {
-			this.invoke('finish');
-		}
-
-	};
-
-	return MultiReporter;
+	finish: function() {
+		this.invoke('finish');
+	}
 };

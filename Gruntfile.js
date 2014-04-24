@@ -1,7 +1,6 @@
 /*global module:false*/
-module.exports = function(grunt) {
 
-	// Project configuration.
+module.exports = function(grunt) {
 	grunt.initConfig({
 		files: ['Gruntfile.js', 'tasks/**/*.js', 'test/*.js'],
 
@@ -21,9 +20,7 @@ module.exports = function(grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	require('./tasks/complexity')(grunt);
 
 	grunt.registerTask('default', ['jshint', 'complexity']);
-
-	// Used for testing only, you shouldn't add this to your code:
-	grunt.loadTasks('tasks');
 };

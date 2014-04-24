@@ -1,6 +1,6 @@
 describe('JSLintXML', function() {
 	var grunt  = require('./grunt.0.4');
-	var cut    = require('../tasks/reporters/XML')(grunt);
+	var cut    = require('../src/reporters/XML')(grunt);
 	var expect = require('chai').expect;
 
 	it ('should escape html chars <>', function() {
