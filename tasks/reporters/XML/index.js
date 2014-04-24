@@ -1,28 +1,28 @@
 module.exports = function(grunt) {
 
 	var XMLReporter = function() {};
-	var fs = require('fs-extra');
+	var fs = require('fs-extra'),
+			path = require('path');
 
 	XMLReporter.prototype = {
 		init: function(options, fileKey, dirname) {
 			this.options = options;
 			this.xmlFilename = options[fileKey];
 
-      if(!this.xmlFilename) {
+			if(!this.xmlFilename) {
 				throw new Error('Output filename not provided!');
 			}
 
 			this.dirname = dirname;
 			this.tpl = this.getTpl();
 
-      var outputDir = this.xmlFilename.split('/')
-											.splice(0, this.xmlFilename.split('/').length - 1).join('/');
+			var outputDir = path.dirname(this.xmlFilename);
 
-      if (outputDir !== '') {
-        fs.mkdirpSync(outputDir);
-      }
+			if (outputDir !== '') {
+				fs.mkdirpSync(outputDir);
+			}
 
-      fs.writeFileSync(this.xmlFilename, '');
+			fs.writeFileSync(this.xmlFilename, '');
 		},
 
 		readTpl: function(name) {
