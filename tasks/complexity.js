@@ -147,7 +147,13 @@ module.exports = function(grunt) {
 
 	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function() {
 		var files = this.filesSrc || grunt.file.expandFiles(this.file.src);
-
+		    excludedFiles = this.data.exclude;
+		    
+		// Exclude any unwanted files from 'files' array
+		if (excludedFiles) {
+		    grunt.file.expand(this.data.exclude).forEach(function (e) { delete files[e]; })
+		}
+		
 		// Set defaults
 		var options = Complexity.normalizeOptions(this.options(Complexity.defaultOptions));
 
