@@ -27,6 +27,7 @@ Within your grunt file:
 		complexity: {
 			generic: {
 				src: ['grunt.js', 'tasks/grunt-complexity.js'],
+				exclude: ['doNotTest.js'],
 				options: {
 					breakOnErrors: true,
 					jsLintXML: 'report.xml',         // create XML JSLint-like report
