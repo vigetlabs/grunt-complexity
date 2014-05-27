@@ -70,3 +70,4 @@ Tests can be run with `mocha`.
 - Patrick Williams [(pwmckenna](https://github.com/pwmckenna))
 - Luís Couto ([Couto](https://github.com/Couto))
 - Roman Liutikov ([roman01la](https://github.com/roman01la))
+- Nick Weingartner ([streetlight](https://github.com/streetlight))
