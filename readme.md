@@ -60,6 +60,10 @@ Then, you should `cd test/grunt.0.4` and `npm install`.
 
 Tests can be run with `mocha`.
 
+## License
+
+`grunt-complexity` is released under the [MIT License](http://opensource.org/licenses/MIT).
+
 ## Contributors
 
 - Nate Hunzaker([nhunzaker](https://github.com/nhunzaker))
