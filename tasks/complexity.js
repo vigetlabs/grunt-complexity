@@ -147,7 +147,7 @@ module.exports = function(grunt) {
 
 	grunt.registerMultiTask('complexity', 'Determines complexity of code.', function() {
 		var files = this.filesSrc || grunt.file.expandFiles(this.file.src);
-		    excludedFiles = this.data.exclude;
+			excludedFiles = this.data.exclude;
 
 		// Exclude any unwanted files from 'files' array
 		if (excludedFiles) {
