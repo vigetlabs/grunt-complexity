@@ -1,3 +1,12 @@
+/*
+ A reporter that broadcasts data the aggregated
+ by grunt-complexity over the grunt event-bus.
+
+ author:  David Linse
+ version: 0.0.1
+ license: MIT
+ */
+
 module.exports = function(grunt) {
   'use strict';
 
