@@ -5,6 +5,7 @@
         "checkstyleXML": "report/checkstyle.xml",
         "cyclomatic": 3,
         "halstead": 8,
-        "maintainability": 100
+        "maintainability": 100,
+        "broadcast": false
     }
 }

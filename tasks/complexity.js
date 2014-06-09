@@ -49,6 +49,11 @@ module.exports = function(grunt) {
 				reporter.addReporter(checkstyleReporter);
 			}
 
+			if (options.broadcast && options.broadcast === true) {
+				var eventReporter = require('./reporters/event-reporter')(grunt);
+				reporter.addReporter(eventReporter);
+			}
+
 			return reporter;
 		},
 
