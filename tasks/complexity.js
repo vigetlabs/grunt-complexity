@@ -151,7 +151,7 @@ module.exports = function(grunt) {
 
 		// Exclude any unwanted files from 'files' array
 		if (excludedFiles) {
-		    grunt.file.expand(excludedFiles).forEach(function (e) { files.splice(files.indexOf(e), 1); })
+			grunt.file.expand(excludedFiles).forEach(function (e) { files.splice(files.indexOf(e), 1); });
 		}
 
 		// Set defaults
