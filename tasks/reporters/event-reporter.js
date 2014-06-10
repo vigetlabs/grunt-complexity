@@ -5,6 +5,14 @@
  author:  David Linse
  version: 0.0.1
  license: MIT
+
+ It emits the following "complex"-namespaced events:
+
+   * grunt-complexity.start
+   * grunt-complexity.maintainability
+   * grunt-complexity.complexity (TBD)
+   * grunt-complexity.finish
+
  */
 
 module.exports = function(grunt) {
