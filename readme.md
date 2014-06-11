@@ -75,3 +75,4 @@ Tests can be run with `mocha`.
 - Luís Couto ([Couto](https://github.com/Couto))
 - Roman Liutikov ([roman01la](https://github.com/roman01la))
 - Nick Weingartner ([streetlight](https://github.com/streetlight))
+- David Linse ([davidlinse](https://github.com/davidlinse))
