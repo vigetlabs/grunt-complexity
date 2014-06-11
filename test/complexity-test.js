@@ -73,10 +73,10 @@ describe("Complexity task", function() {
 			maintainability: 120
 		};
 
-		it('should return true if maintainability is greater than in options', function() {
+		it('should return true if maintainability is greater than or equal to options', function() {
 			// given
 			var options = {
-				maintainability: 100
+				maintainability: 120
 			};
 
 			// when

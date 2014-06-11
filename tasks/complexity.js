@@ -70,7 +70,7 @@ module.exports = function(grunt) {
 			var expected = options.maintainability;
 			var actual = data.maintainability;
 
-			return expected < actual;
+			return expected <= actual;
 		},
 
 		assignSeverity: function(data, options) {
