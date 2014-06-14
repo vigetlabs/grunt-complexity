@@ -27,6 +27,12 @@ module.exports = function(grunt) {
     // only invoked when offending code was detected
     //
     complexity: function(filepath, complexFunctions) {
+
+      //
+      // A possible workaround could be to 'force' a run
+      // w/ all metrics set to it's minimum and 'breakOnError' option
+      // set to 'false'
+
       // TODO
     },
 
