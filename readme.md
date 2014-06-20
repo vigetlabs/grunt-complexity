@@ -36,7 +36,8 @@ Within your grunt file:
 					cyclomatic: [3, 7, 12],          // or optionally a single value, like 3
 					halstead: [8, 13, 20],           // or optionally a single value, like 8
 					maintainability: 100,
-                    hideComplexFunctions: false      // only display maintainability
+					hideComplexFunctions: false      // only display maintainability
+					broadcast: false                 // broadcast data over event-bus
 				}
 			}
 		}
@@ -51,6 +52,26 @@ Within your grunt file:
 ## What is Cyclomatic and Halstead?
 
 Documentation on this to come. For now, see [jscomplexity.org](http://jscomplexity.org/complexity)
+
+## Reporter
+
+Set the `broadcast` option to `true` to send the aggregated data over the
+grunt-event bus.
+
+Emitted events are:
+
+* `grunt-complexity.start`
+* `grunt-complexity.maintainability, payload`
+* `grunt-complexity.end`
+
+```js
+// payload of grunt-complexity.maintainability
+{
+  filepath: /path/to/file,
+  valid: true|false,
+  maintainability: 123.42
+}
+```
 
 ## Contributing
 
