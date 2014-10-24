@@ -1,4 +1,5 @@
 # Grunt-Complexity
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/vigetlabs/grunt-complexity?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A [grunt](http://github.com/gruntjs/grunt/) task that utilizes
 [complexity-report](https://github.com/philbooth/complexityReport.js)
