@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 	var XMLReporter = require('./reporters/XML')(grunt);
 	var JSLintXMLReporter = require('./reporters/JSLintXML')(grunt, XMLReporter);
 	var checkstyleReporter = require('./reporters/CheckstyleXML')(grunt, XMLReporter);
+	var pmdReporter = require('./reporters/PmdXML')(grunt, XMLReporter);
 
 	var Complexity = {
 
@@ -47,6 +48,10 @@ module.exports = function(grunt) {
 
 			if (options.checkstyleXML) {
 				reporter.addReporter(checkstyleReporter);
+			}
+
+			if (options.pmdXML) {
+				reporter.addReporter(pmdReporter);
 			}
 
 			if (options.broadcast && options.broadcast === true) {
