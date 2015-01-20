@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "0.10"
+before_script:
+  git submodule init
+  git submodule update
+  cd test/grunt.0.4
+  npm install
+  cd ...

@@ -77,11 +77,17 @@ Emitted events are:
 
 ## Contributing
 
-This repo has a submodule, so after you `npm install`, you'll want to `git submodule init` and `git submodule update`.
+This repo has a submodule, so after you `npm install`, you'll want to run:
 
-Then, you should `cd test/grunt.0.4` and `npm install`.
+```bash
+git submodule init
+git submodule update
+cd test/grunt.0.4
+npm install
+cd ...
+```
 
-Tests can be run with `mocha`.
+Tests can be run with `npm test`.
 
 ## License
 
