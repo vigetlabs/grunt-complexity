@@ -3,7 +3,7 @@ module.exports = function(grunt, XMLReporter) {
 		this.init(options, 'pmdXML', __dirname);
 	};
 
-  pmdReporter.prototype = new XMLReporter();
+	pmdReporter.prototype = new XMLReporter();
 
 	return pmdReporter;
 };
