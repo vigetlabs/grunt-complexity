@@ -99,3 +99,4 @@ Tests can be run with `mocha`.
 - Roman Liutikov ([roman01la](https://github.com/roman01la))
 - Nick Weingartner ([streetlight](https://github.com/streetlight))
 - David Linse ([davidlinse](https://github.com/davidlinse))
+- Tim Carry ([pixelastic](https://github.com/pixelastic))
