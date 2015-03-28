@@ -140,6 +140,11 @@ module.exports = function(grunt) {
 
 			files.map(function(filepath) {
 				var content = grunt.file.read(filepath);
+
+				if (!content.length) {
+					throw new Error('Empty source file: \'' + filepath + '\'.');
+				}
+
 				return {
 					filepath: filepath,
 					analysis: cr.run(content, options)
