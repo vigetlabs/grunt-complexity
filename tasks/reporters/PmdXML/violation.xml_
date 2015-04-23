@@ -2,7 +2,7 @@
     <violation
       beginline="<%=data.line %>"
       class="<%= data.filepath %>"
-      method="<%= data.name %>"
+      method="<%= escape(data.name) %>"
       priority="<%= data.severity %>"
       rule="ComplexityViolation">
       The Complexity is too high. The value is <%= data.complexity.cyclomatic %>
