@@ -7,6 +7,7 @@
         "cyclomatic": 3,
         "halstead": 8,
         "maintainability": 100,
-        "broadcast": false
+        "broadcast": false,
+        "allowWarnings": true
     }
 }
