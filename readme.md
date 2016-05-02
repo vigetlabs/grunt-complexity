@@ -22,7 +22,7 @@ to evaluate the complexity and maintainability of code.
 ## Usage
 
 ```bash
-npm install grunt-complexity --save
+npm install grunt-complexity --save-dev
 ```
 
 Within your grunt file:
