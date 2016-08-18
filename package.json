@@ -15,9 +15,7 @@
   "bugs": {
     "url": "https://github.com/vigetlabs/grunt-complexity/issues"
   },
-  "license": [
-    "MIT"
-  ],
+  "license": "MIT",
   "main": "grunt.js",
   "readmeFilename": "readme.md",
   "scripts": {
