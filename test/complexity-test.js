@@ -26,6 +26,38 @@ describe("Complexity task", function() {
 		}).to.throw('Empty source file: \'' + targetFile + '\'.');
 	});
 
+	it ('parses es6', function () {
+		var reporter = {
+			start: function () {},
+			maintainability: function () {},
+			complexity: function () {},
+			finish: function () {}
+		};
+
+	  var options = cut.normalizeOptions({
+			cyclomatic: 3,
+			halstead: 8
+		});
+
+		cut.analyze(reporter, [__dirname + '/fixtures/es6.js'], options)
+	});
+
+	it ('parses jsx', function () {
+		var reporter = {
+			start: function () {},
+			maintainability: function () {},
+			complexity: function () {},
+			finish: function () {}
+		};
+
+	  var options = cut.normalizeOptions({
+			cyclomatic: 3,
+			halstead: 8
+		});
+
+		cut.analyze(reporter, [__dirname + '/fixtures/react.jsx'], options)
+	});
+
 	describe("isComplicated", function() {
 		var data = {
 			cyclomatic: 5,

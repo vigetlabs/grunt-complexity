@@ -143,6 +143,7 @@ module.exports = function(grunt) {
 				if (!content.length) {
 					throw new Error('Empty source file: \'' + filepath + '\'.');
 				}
+
 				return {
 					filepath: filepath,
 					analysis: escomplex.analyzeModule(content, options)
