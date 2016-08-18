@@ -29,7 +29,7 @@
     "fs-extra": "~0.8.1"
   },
   "devDependencies": {
-    "chai": "1.4.2",
+    "chai": "3.5.0",
     "grunt": ">=0.4.1",
     "grunt-complexity": "https://github.com/vigetlabs/grunt-complexity/tarball/master",
     "grunt-contrib-jshint": "~1.0.0",
