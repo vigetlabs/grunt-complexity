@@ -1,9 +1,8 @@
 language: node_js
 node_js:
-  - "0.10"
+  - "5.7.1"
 before_script:
-  git submodule init
-  git submodule update
+  git submodule update --init --recursive
   cd test/grunt.0.4
   npm install
   cd ...
