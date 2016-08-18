@@ -1,8 +1,8 @@
 # CHANGELOG
 
-# 1.0.0 (release candidate)
+# 1.0.0
 
-- Support ES6 by switching to the `typhonjs-escomplex` variant.
+- Support ES6 by switching to the `typhonjs-escomplex` variant. (Thanks, @kevde!)
 
 # 0.4.0
 
