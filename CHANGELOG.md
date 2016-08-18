@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.0.0 (alpha)
+
+- Support ES6 by switching to the `typhonjs-escomplex` variant.
+
 # 0.4.0
 
 - Throw a more detailed error message in event of an empty source file
