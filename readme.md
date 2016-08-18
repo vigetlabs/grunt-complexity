@@ -1,10 +1,6 @@
 # Grunt-Complexity
 
----
-
 [![Build Status](https://travis-ci.org/vigetlabs/grunt-complexity.svg)](https://travis-ci.org/vigetlabs/grunt-complexity)
-
----
 
 A [grunt](http://github.com/gruntjs/grunt/) task that utilizes
 [complexity-report](https://github.com/philbooth/complexityReport.js)
