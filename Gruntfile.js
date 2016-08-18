@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 
-		files: ['Gruntfile.js', 'tasks/**/*.js', 'test/*.js'],
+		files: ['Gruntfile.js', 'tasks/**/*.js', 'test/**/*.js'],
 
 		watch: {
 			all: {
@@ -13,7 +13,10 @@ module.exports = function(grunt) {
 		},
 
 		jshint: {
-			all: '<%= files %>'
+			all: '<%= files %>',
+			options: {
+				esnext: true
+			}
 		},
 
 		complexity: {

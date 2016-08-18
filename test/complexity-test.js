@@ -39,7 +39,7 @@ describe("Complexity task", function() {
 			halstead: 8
 		});
 
-		cut.analyze(reporter, [__dirname + '/fixtures/es6.js'], options)
+		cut.analyze(reporter, [__dirname + '/fixtures/es6.js'], options);
 	});
 
 	it ('parses jsx', function () {
@@ -55,7 +55,7 @@ describe("Complexity task", function() {
 			halstead: 8
 		});
 
-		cut.analyze(reporter, [__dirname + '/fixtures/react.jsx'], options)
+		cut.analyze(reporter, [__dirname + '/fixtures/react.jsx'], options);
 	});
 
 	describe("isComplicated", function() {
