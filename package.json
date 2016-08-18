@@ -15,12 +15,7 @@
   "bugs": {
     "url": "https://github.com/vigetlabs/grunt-complexity/issues"
   },
-  "licences": [
-    {
-      "type": "MIT",
-      "url": "http://opensource.org/licenses/MIT"
-    }
-  ],
+  "license": ["MIT"],
   "main": "grunt.js",
   "readmeFilename": "readme.md",
   "engines": {
@@ -38,9 +33,9 @@
     "chai": "1.4.2",
     "grunt": ">=0.4.1",
     "grunt-complexity": "https://github.com/vigetlabs/grunt-complexity/tarball/master",
-    "grunt-contrib-jshint": "0.1.x",
-    "grunt-simple-mocha": "0.3.x",
-    "mocha": "~1.8.1",
+    "grunt-contrib-jshint": "~1.0.0",
+    "grunt-simple-mocha": "~0.4.1",
+    "mocha": "~3.0.2",
     "sinon": "^1.10.2"
   },
   "keywords": [
