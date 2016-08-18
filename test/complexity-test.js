@@ -15,6 +15,17 @@ describe("Complexity task", function() {
 		expect(normalized.halstead).to.eql([9]);
 	});
 
+	it ('throws an error when encountering an empty file', function () {
+		var targetFile = __dirname + '/fixtures/empty.js';
+		var reporter = {
+			start: function () {}
+		};
+
+		expect(function () {
+			cut.analyze(reporter, [targetFile], null);
+		}).to.throw('Empty source file: \'' + targetFile + '\'.');
+	});
+
 	describe("isComplicated", function() {
 		var data = {
 			complexity: {
