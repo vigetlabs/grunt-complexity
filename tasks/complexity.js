@@ -17,7 +17,8 @@ module.exports = function(grunt) {
 			cyclomatic: [3, 7, 12],
 			halstead: [8, 13, 20],
 			maintainability: 100,
-			hideComplexFunctions: false
+			hideComplexFunctions: false,
+			allowWarnings: false
 		},
 
 		normalizeOptions: function(options) {
@@ -116,7 +117,11 @@ module.exports = function(grunt) {
 				}, this);
 			}
 
-			grunt.fail.errorcount += complicatedFunctions.length;
+			var errors = complicatedFunctions.filter(function(data){
+				return data.severity === "error";
+			});
+
+			grunt.fail.errorcount += (options.allowWarnings ? errors.length : complicatedFunctions.length);
 
 			reporter.complexity(filepath, complicatedFunctions);
 

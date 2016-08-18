@@ -7,16 +7,16 @@ describe('Event Reporter', function() {
 
 	it ('triggers a maintainability event', function(done) {
 		var targetFile = __dirname + '/fixtures/sample.js';
-		var reporter   = Complexity.buildReporter([targetFile], { broadcast: true })
+		var reporter   = Complexity.buildReporter([targetFile], { broadcast: true });
 
 		grunt.event.on('grunt-complexity.maintainability', function(report) {
-			expect(report.filepath).to.equal(targetFile)
-			expect(report.valid).to.equal(true)
-			done()
-		})
+			expect(report.filepath).to.equal(targetFile);
+			expect(report.valid).to.equal(true);
+			done();
+		});
 
 		Complexity.analyze(reporter, [targetFile], Complexity.normalizeOptions({
 			maintainability: 0
-		}))
+		}));
 	});
 });
