@@ -1,5 +1,5 @@
 describe('MultiReporter', function() {
-	var grunt = require('./grunt.0.4');
+	var grunt  = require('grunt');
 	var MultiReporter = require('../tasks/reporters/multi')(grunt);
 	var expect = require('chai').expect;
 

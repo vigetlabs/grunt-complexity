@@ -1,5 +1,5 @@
 describe('JSLintXML', function() {
-	var grunt  = require('./grunt.0.4');
+	var grunt  = require('grunt');
 	var cut    = require('../tasks/reporters/XML')(grunt);
 	var expect = require('chai').expect;
 

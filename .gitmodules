@@ -1,3 +1,0 @@
-[submodule "test/grunt.0.4"]
-	path = test/grunt.0.4
-	url = https://github.com/gruntjs/grunt.git

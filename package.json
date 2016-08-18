@@ -20,9 +20,6 @@
   ],
   "main": "grunt.js",
   "readmeFilename": "readme.md",
-  "engines": {
-    "node": ">=0.8.0"
-  },
   "scripts": {
     "test": "mocha"
   },

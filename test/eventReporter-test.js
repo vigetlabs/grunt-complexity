@@ -1,6 +1,6 @@
 describe('Event Reporter', function() {
 	var expect = require('chai').expect;
-	var grunt = require('./grunt.0.4');
+	var grunt = require('grunt');
 
 	var Complexity = require('../tasks/complexity')(grunt);
 	var EventReporter = require('../tasks/reporters/event-reporter')(grunt);
