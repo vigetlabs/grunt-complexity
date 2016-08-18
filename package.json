@@ -24,6 +24,7 @@
   "dependencies": {
     "fs-extra": "~0.30.0",
     "grunt": ">=0.4.x",
+    "lodash": "^4.15.0",
     "typhonjs-escomplex": "0.0.12"
   },
   "devDependencies": {

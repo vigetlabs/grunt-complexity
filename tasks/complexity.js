@@ -1,5 +1,6 @@
 /*global module:false*/
 var escomplex = require('typhonjs-escomplex');
+var _ = require('lodash');
 
 module.exports = function(grunt) {
 	var MultiReporter = require('./reporters/multi')(grunt);
@@ -106,55 +107,59 @@ module.exports = function(grunt) {
 		},
 
 		reportComplexity: function(reporter, analysis, filepath, options) {
-			var complicatedFunctions = [];
-
+			var classFunctionsReports = this.getFunctionsFromClasses(analysis.classes);
+			var methodFunctionsReports = analysis.methods;
+			var complicatedFunctions = []; 
+			
 			if (options.hideComplexFunctions !== true) {
-				complicatedFunctions = analysis.methods.filter(function(data) {
-					return this.isComplicated(data, options);
-				}, this).map(function(data) {
-					return this.assignSeverity(data, options);
-				}, this);
+				var allFunctionReports = methodFunctionsReports.concat(classFunctionsReports);
+				complicatedFunctions = this.getComplicatedFunctions(allFunctionReports, options);
 			}
 
 			grunt.fail.errorcount += complicatedFunctions.length;
-
 			reporter.complexity(filepath, complicatedFunctions);
+		},
 
+		getFunctionsFromClasses: function(classes) {
+			return _.flatMap(classes, 'methods');
+		},
+
+		getComplicatedFunctions: function(methodList, options) {
+			return methodList.filter((data) => this.isComplicated(data, options)).map((data) => this.assignSeverity(data, options));
 		},
 
 		reportMaintainability: function(reporter, analysis, filepath, options) {
 			var valid = this.isMaintainable(analysis, options);
-
 			if (!options.errorsOnly || !valid) {
 				reporter.maintainability(filepath, valid, analysis);
 			}
+		},
 
-			if (!valid) {
-				grunt.fail.errorcount++;
-			}
+		getProjectInfos: function(files) {
+			return files.map((filepath) => {
+				var content = grunt.file.read(filepath);
+					if (!content.length) {
+						throw new Error('Empty source file: \'' + filepath + '\'.');
+					} else {
+						return { srcPath: filepath, code: content };
+					}
+			});
+		},
+
+		displayReports: function(reporter, fileReports, options) {
+			fileReports = _.orderBy(fileReports,'analysis.maintainability', 'asc');
+			grunt.fail.errorcount = _.countBy(fileReports, (report) => this.isMaintainable(report, options));
+			fileReports.forEach((info) => {
+				this.reportMaintainability(reporter, info.analysis, info.filepath, options);
+				this.reportComplexity(reporter, info.analysis, info.filepath, options);
+			});
 		},
 
 		analyze: function(reporter, files, options) {
 			reporter.start();
-
-			files.map(function(filepath) {
-				var content = grunt.file.read(filepath);
-
-				if (!content.length) {
-					throw new Error('Empty source file: \'' + filepath + '\'.');
-				}
-
-				return {
-					filepath: filepath,
-					analysis: escomplex.analyzeModule(content, options)
-				};
-			}).sort(function (info1, info2) {
-				return info1.analysis.maintainability - info2.analysis.maintainability;
-			}).forEach(function (info) {
-				this.reportMaintainability(reporter, info.analysis, info.filepath, options);
-				this.reportComplexity(reporter, info.analysis, info.filepath, options);
-			}, this);
-
+			var analyzedProject = escomplex.analyzeProject(this.getProjectInfos(files), options);
+			var fileReports = analyzedProject.modules.map((moduleReport) => ({ filepath: moduleReport.srcPath, analysis: moduleReport }));
+			this.displayReports(reporter, fileReports, options);
 			reporter.finish();
 		}
 	};
