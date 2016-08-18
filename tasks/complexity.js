@@ -1,5 +1,5 @@
 /*global module:false*/
-var escomplex = require('escomplex');
+var escomplex = require('typhonjs-escomplex');
 
 module.exports = function(grunt) {
 	var MultiReporter = require('./reporters/multi')(grunt);
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
 			var complicatedFunctions = [];
 
 			if (options.hideComplexFunctions !== true) {
-				complicatedFunctions = analysis.functions.filter(function(data) {
+				complicatedFunctions = analysis.methods.filter(function(data) {
 					return this.isComplicated(data, options);
 				}, this).map(function(data) {
 					return this.assignSeverity(data, options);
@@ -145,7 +145,7 @@ module.exports = function(grunt) {
 				}
 				return {
 					filepath: filepath,
-					analysis: escomplex.analyse(content, options)
+					analysis: escomplex.analyzeModule(content, options)
 				};
 			}).sort(function (info1, info2) {
 				return info1.analysis.maintainability - info2.analysis.maintainability;

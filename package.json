@@ -22,9 +22,9 @@
     "test": "mocha"
   },
   "dependencies": {
-    "escomplex": "2.0.0-alpha",
     "fs-extra": "~0.30.0",
-    "grunt": ">=0.4.x"
+    "grunt": ">=0.4.x",
+    "typhonjs-escomplex": "0.0.12"
   },
   "devDependencies": {
     "chai": "3.5.0",
