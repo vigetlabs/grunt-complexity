@@ -1,13 +1,13 @@
 <file name="<%= filepath %>">
   <% complexFunctions.forEach(function(data){ %>
   <error
-    line="<%= data.line %>"
+    line="<%= data.lineStart %>"
     severity="<%= data.severity %>"
-    message="Cyclomatic: <%= data.complexity.cyclomatic %>,
-    Halstead: <%= data.complexity.halstead.difficulty.toPrecision(5) %>
-    | Effort: <%= data.complexity.halstead.effort.toPrecision(5) %>
-    | Volume: <%= data.complexity.halstead.volume.toPrecision(5) %>
-    | Vocabulary: <%= data.complexity.halstead.vocabulary %>"
+    message="Cyclomatic: <%= data.cyclomatic %>,
+    Halstead: <%= data.halstead.difficulty.toPrecision(5) %>
+    | Effort: <%= data.halstead.effort.toPrecision(5) %>
+    | Volume: <%= data.halstead.volume.toPrecision(5) %>
+    | Vocabulary: <%= data.halstead.vocabulary %>"
     source="<%= escape(data.name) %>"
     />
   <% }) %>

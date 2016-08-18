@@ -1,11 +1,11 @@
 <file name="<%= filepath %>"><% complexFunctions.forEach(function(data){ %>
     <violation
-      beginline="<%=data.line %>"
+      beginline="<%=data.lineStart %>"
       class="<%= data.filepath %>"
       method="<%= escape(data.name) %>"
       priority="<%= data.severity %>"
       rule="ComplexityViolation">
-      The Complexity is too high. The value is <%= data.complexity.cyclomatic %>
+      The Complexity is too high. The value is <%= data.cyclomatic %>
     </violation>
 <% }) %></file>
 
