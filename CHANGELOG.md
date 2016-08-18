@@ -1,6 +1,6 @@
 # CHANGELOG
 
-# 0.4.0 (not released)
+# 0.4.0
 
 - Throw a more detailed error message in event of an empty source file
 (@skoblenick [91dc55f](https://github.com/vigetlabs/grunt-complexity/pull/37/commits/91dc55fa05eea28e78acac2882867c79cc21abc5))
