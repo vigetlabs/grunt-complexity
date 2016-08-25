@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.0.1
+
+- Properly count maintainability score
+
 # 1.0.0
 
 - Support ES6 by switching to the `typhonjs-escomplex` variant. (Thanks, @kevde!)
