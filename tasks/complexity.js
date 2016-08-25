@@ -148,7 +148,7 @@ module.exports = function(grunt) {
 
 		displayReports: function(reporter, fileReports, options) {
 			fileReports = _.orderBy(fileReports,'analysis.maintainability', 'asc');
-			grunt.fail.errorcount = _.countBy(fileReports, (report) => this.isMaintainable(report, options));
+			grunt.fail.errorcount = _.countBy(fileReports, (report) => this.isMaintainable(report, options)).true || 0;
 			fileReports.forEach((info) => {
 				this.reportMaintainability(reporter, info.analysis, info.filepath, options);
 				this.reportComplexity(reporter, info.analysis, info.filepath, options);
