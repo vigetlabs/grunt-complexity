@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.1.0
+
+- Fix grunt.fail.errorcount (thanks @bob-gray!): https://github.com/vigetlabs/grunt-complexity/pull/48
+
 # 1.0.1
 
 - Properly count maintainability score
